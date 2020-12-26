@@ -42,7 +42,7 @@ public class EnchainementTest {
         section.addObjet(obj1);
         section.addObjet(obj2);
         section.addObjet(obj3);
-        String[] expected1 = {"épée", "bouclier", "arc"};
+        string[] expected1 = {"épée", "bouclier", "arc"};
         assertEquals(expected1, section.getObjets());
 
 
