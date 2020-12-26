@@ -1,6 +1,7 @@
 package livreTests;
 import static org.junit.Assert.*;
 
+
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -41,7 +42,7 @@ public class EnchainementTest {
         section.addObjet(obj1);
         section.addObjet(obj2);
         section.addObjet(obj3);
-        string[] expected1 = {"épée", "bouclier", "arc"};
+        String[] expected1 = {"épée", "bouclier", "arc"};
         assertEquals(expected1, section.getObjets());
 
 

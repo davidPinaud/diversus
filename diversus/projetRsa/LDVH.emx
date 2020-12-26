@@ -2580,7 +2580,7 @@
             <children xmi:type="notation:ListCompartment" xmi:id="_pJMstEdwEeuROrqyRANNnw" type="RequiredInterfaceListCompartment"/>
             <children xmi:type="notation:ListCompartment" xmi:id="_pJMstUdwEeuROrqyRANNnw" type="ProvidedInterfaceListCompartment"/>
             <children xmi:type="umlnotation:UMLShapeCompartment" xmi:id="_pJMstkdwEeuROrqyRANNnw" visible="false" type="StructureCompartment"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pJMFoUdwEeuROrqyRANNnw" x="5476" y="26617"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pJMFoUdwEeuROrqyRANNnw" x="6657" y="22824"/>
           </children>
           <element xsi:nil="true"/>
           <edges xmi:type="umlnotation:UMLConnector" xmi:id="_64HV4DAAEeuh-vvNr8PiLQ" element="_63lxcDAAEeuh-vvNr8PiLQ" source="_egg7ki6qEeu45NjBeVsWmg" target="_egg7zy6qEeu45NjBeVsWmg" fontName="Segoe UI" fontHeight="8" roundedBendpointsRadius="4" routing="Rectilinear" lineColor="8421504" lineWidth="1" showStereotype="Text">
