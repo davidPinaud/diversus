@@ -3,8 +3,9 @@
  */
 package composants.CLivre;
 
-import itf.IEnchainement;
 import itf.*;
+
+import java.util.List;
 import java.util.Set;
 
 /** 
@@ -25,19 +26,14 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Section section;
+	private ISection section1;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Set<Objets> objets;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Section section2;
+
+	private ISection section2;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -62,28 +58,12 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Set<Section> section3;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<Section> section4;
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param nom
-	* @param description
-	* @param src
-	* @param dst
-	* @param objets
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Enchainement(String nom, String description, ISection src, ISection dst, String... objets) {
-		// begin-user-code
-		// TODO Auto-generated constructor stub
-		// end-user-code
+	public Enchainement(String nom, String description, ISection src, ISection dst, List<IObjet> objets) {
+		super(objets);
+		this.nom = nom;
+		this.texte = description;
+		this.section1 = src;
+		this.section2 = dst;
 	}
 
 	/** 
@@ -92,10 +72,7 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public String getSource() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		return section1.getNom();
 	}
 
 	/** 
@@ -106,7 +83,7 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	public String getDestination() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		return section2.getNom();
 		// end-user-code
 	}
 
@@ -118,7 +95,7 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	public String getNom() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		return nom;
 		// end-user-code
 	}
 
@@ -128,10 +105,7 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void setNom(String nom) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.nom = nom;
 	}
 
 	/** 
@@ -140,10 +114,7 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void SetDescription(String desc) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.texte = desc;
 	}
 
 	/** 
@@ -152,10 +123,7 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void setSrc(ISection src) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.section1 = src;
 	}
 
 	/** 
@@ -164,10 +132,7 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void setDest(ISection dst) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.section2 = dst;
 	}
 
 	/** 
@@ -175,7 +140,7 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	* @see IEnchainement#AddObjet(String Objet)
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void AddObjet(String Objet) {
+	//public void AddObjet(String Objet) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
