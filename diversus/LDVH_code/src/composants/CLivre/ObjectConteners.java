@@ -12,12 +12,12 @@ import itf.IObjet;
  * Classe parent qui référence une liste d'objets 
  */
 public class ObjectConteners {
-
+	String nom;
 	private List<IObjet> objets=new ArrayList<IObjet>();
 
 
-	public ObjectConteners() {
-		
+	public ObjectConteners(String nom) {
+		this.nom=nom;
 	}
 	public ObjectConteners(List<IObjet> objets) {
 		for (IObjet o:objets) {
@@ -28,6 +28,9 @@ public class ObjectConteners {
 				e.printStackTrace();
 			}
 		}
+	}
+	public String getNom() {
+		return nom;
 	}
 	public List<IObjet> getObjets() {
 		// begin-user-code
@@ -53,7 +56,7 @@ public class ObjectConteners {
 ;		
 		ob.addContener(this);
 		objets.add(o);
-		// end-user-code
+		System.out.println(" Objet "+ o.getNom()+ " ajouté au conteneur "+nom);
 	}
 
 	/** 
@@ -64,5 +67,6 @@ public class ObjectConteners {
 	public void deleteObjet(IObjet o) {
 		
 		objets.remove(o);
+		System.out.println(" Objet "+ o.getNom()+ " supprimé du conteneur "+nom);
 	}
 }

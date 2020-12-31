@@ -5857,9 +5857,6 @@
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ruI-hTzXEeuRHvJ7wqTdcA" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ruI-hjzXEeuRHvJ7wqTdcA"/>
           </ownedAttribute>
-          <ownedAttribute xmi:id="_ruI-iDzXEeuRHvJ7wqTdcA" name="nom" visibility="private">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </ownedAttribute>
           <ownedAttribute xmi:id="_MH9XQEcREeuhFqcb0zDgtw" name="enchainement3" visibility="private" type="_ruKzoDzXEeuRHvJ7wqTdcA" aggregation="shared" association="_MH8JIEcREeuhFqcb0zDgtw">
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MH-lYEcREeuhFqcb0zDgtw" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MH9-UEcREeuhFqcb0zDgtw"/>
@@ -5931,9 +5928,6 @@
           <ownedAttribute xmi:id="_ruKzrTzXEeuRHvJ7wqTdcA" name="texte" visibility="private">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedAttribute>
-          <ownedAttribute xmi:id="_ruKzrjzXEeuRHvJ7wqTdcA" name="nom" visibility="private">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </ownedAttribute>
           <ownedAttribute xmi:id="_pD6yQD03EeuRYOT4UpgUqA" name="id" visibility="private" type="_qw0Y8D03EeuRYOT4UpgUqA"/>
           <ownedAttribute xmi:id="_VT-wYEddEeuROrqyRANNnw" name="section3" visibility="private" type="_ruI-cDzXEeuRHvJ7wqTdcA" aggregation="shared" association="_VT8UIEddEeuROrqyRANNnw">
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VUBzsEddEeuROrqyRANNnw" value="*"/>
@@ -5994,6 +5988,7 @@
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_R-pIsUcPEeuhFqcb0zDgtw" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_R-pIsEcPEeuhFqcb0zDgtw"/>
           </ownedAttribute>
+          <ownedAttribute xmi:id="_Yde_0Er-EeuRsqZWmdWGBQ" name="nom" visibility="private" type="_KWvGQEeKEeuROrqyRANNnw"/>
           <ownedOperation xmi:id="_9uhl0EcLEeuhFqcb0zDgtw" name="getObjets">
             <ownedParameter xmi:id="_CLAYMEcMEeuhFqcb0zDgtw" name="Parameter1" type="_ws-F8C6fEeu45NjBeVsWmg" direction="return">
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OX7BAEcMEeuhFqcb0zDgtw" value="*"/>
@@ -6011,6 +6006,9 @@
           </ownedOperation>
           <ownedOperation xmi:id="_PDteEEcOEeuhFqcb0zDgtw" name="deleteObjet">
             <ownedParameter xmi:id="_huQ2YEr4EeuRsqZWmdWGBQ" name="nom" type="_KWvGQEeKEeuROrqyRANNnw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_eWh20Er-EeuRsqZWmdWGBQ" name="getNom">
+            <ownedParameter xmi:id="_fkTRgEr-EeuRsqZWmdWGBQ" name="Parameter1" type="_KWvGQEeKEeuROrqyRANNnw" direction="return"/>
           </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Association" xmi:id="_KrXIUEcPEeuhFqcb0zDgtw" name="contains" memberEnd="_KrXvYEcPEeuhFqcb0zDgtw _KrZkkEcPEeuhFqcb0zDgtw">
