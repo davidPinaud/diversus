@@ -4,6 +4,8 @@
 package composants.CLivre;
 
 import itf.ILivre;
+
+import java.util.HashMap;
 import java.util.Set;
 
 /** 
@@ -40,6 +42,8 @@ public class Livre implements ILivre {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private String auteur;
+	
+
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -75,7 +79,7 @@ public class Livre implements ILivre {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Set<Objets> objets;
+	private HashMap<String,Objets> objets;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -123,7 +127,7 @@ public class Livre implements ILivre {
 	@Override
 	public void createObject(String nom) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -216,4 +220,36 @@ public class Livre implements ILivre {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public String toString() {
+		StringBuilder sb=new StringBuilder();
+		sb.append(id);
+		sb.append("livre :");
+		sb.append(titre);
+		sb.append(" d'auteur ' ");
+		sb.append(auteur);
+		sb.append(" '");
+		return sb.toString();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see itf.ILivre#deleteObjet(java.lang.String)
+	 * @return false si l'objet n'existe pas 
+	 */
+	@Override
+	public boolean deleteObjet(String nom){
+		Objets o=objets.get(nom);
+		if( o==null) {
+			return false;
+		}
+		o.deleteObjet();
+		objets.remove(nom);
+		return true;
+		
+	}
+	public void addObjet(String nom) {
+		
+	}
+	
 }

@@ -174,6 +174,9 @@ public interface ILivre {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public String getTete();
-	public Boolean deleteSection(String nom) ;
+	public boolean deleteSection(String nom) ;
+	public String toString();
+	public boolean deleteObjet(String nom);
+	public void addObjet(String nom);
 
 }

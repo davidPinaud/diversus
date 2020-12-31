@@ -4,7 +4,12 @@
 package composants.CLivre;
 
 import itf.IObjet;
-import java.util.Set;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /** 
  * <!-- begin-UML-doc -->
@@ -13,47 +18,20 @@ import java.util.Set;
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class Objets implements IObjet {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private String nom_objet;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<Enchainement> enchainement;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Section section;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Livre livre;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object ObjectConteners;
 
-	/** 
-	* (non-Javadoc)
-	* @see IObjet#getNom()
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	private String nom_objet;
+	/**
+	 * Liste initialement vide, contient des références vers les sections et les enchainements qui référencent l'objet courant
+	 */
+	private List< ObjectConteners> contaners=new ArrayList< ObjectConteners> ();
+	public Objets(String nom) {
+		nom_objet=nom;
+		
+	}
+	
 	public String getNom() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+
+		return nom_objet;
 	}
 
 	/** 
@@ -62,21 +40,16 @@ public class Objets implements IObjet {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void deleteObjet() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		for (ObjectConteners o: contaners) {
+			o.deleteObjet();
+		}
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IObjet#addObjet()
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void addObjet() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void addContener(ObjectConteners o) {
+		
+		contaners.add(o);
 	}
+
+
+
 }

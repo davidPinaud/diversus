@@ -3,6 +3,8 @@
  */
 package itf;
 
+import composants.CLivre.ObjectConteners;
+
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
@@ -17,4 +19,6 @@ public interface IObjet {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public String getNom();
+
+	
 }

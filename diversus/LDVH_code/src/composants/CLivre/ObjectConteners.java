@@ -3,39 +3,36 @@
  */
 package composants.CLivre;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 import itf.IObjet;
 
 /** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author inas
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ * Classe parent qui référence une liste d'objets 
  */
 public class ObjectConteners {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<Objets> objets;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<Objets> objets2;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Set<IObjet> getObjets() {
+	private List<IObjet> objets=new ArrayList<IObjet>();
+
+
+	public ObjectConteners() {
+		
+	}
+	public ObjectConteners(List<IObjet> objets) {
+		for (IObjet o:objets) {
+			try {
+				AddObjet(o);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	public List<IObjet> getObjets() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		return objets;
 		// end-user-code
 	}
 
@@ -43,12 +40,19 @@ public class ObjectConteners {
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @return
+	 * @throws Exception 
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set<Object> AddObjet() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
+	public void AddObjet(IObjet o) throws Exception {
+		// ajouter la référence à l'objet
+		if ( ! (o instanceof Objets)) {
+			throw new Exception(" problème d'argument dans AddObjet, doit être un instance de Objets");
+		}
+		Objets ob=(Objets) o;
+		
+;		
+		ob.addContener(this);
+		objets.add(o);
 		// end-user-code
 	}
 
@@ -57,10 +61,8 @@ public class ObjectConteners {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void deleteObjet() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void deleteObjet(IObjet o) {
+		
+		objets.remove(o);
 	}
 }
