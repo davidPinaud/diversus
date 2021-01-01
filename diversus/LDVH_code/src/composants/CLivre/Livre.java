@@ -159,7 +159,7 @@ public class Livre implements ILivre {
 	}
 
 	@Override
-	public Boolean SectionExist(Class nom) {
+	public Boolean SectionExist(String nom) {
 		return section.containsKey(nom);
 	}
 
