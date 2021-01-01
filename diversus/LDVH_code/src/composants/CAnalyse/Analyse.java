@@ -5,6 +5,7 @@ package composants.CAnalyse;
 
 import java.util.Set;
 
+import composants.CLivre.GestLivres;
 import itf.IAnalyse;
 
 /** 
@@ -13,11 +14,15 @@ import itf.IAnalyse;
  * @author inas
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class Analyse {
-
+public class Analyse implements IAnalyse{
+	
+	GestLivres gestLivre;
+	
+	public Analyse(GestLivres gestLivre) {
+		this.gestLivre=gestLivre;
+	}
 	@Override
 	public Set<String> Analyser_graphe() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
