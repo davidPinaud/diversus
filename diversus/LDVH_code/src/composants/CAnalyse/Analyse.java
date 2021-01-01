@@ -30,13 +30,13 @@ public class Analyse implements IAnalyse{
 	}
 	@Override
 	public List<String> Analyser_graphe() {
-		Section teteSection=((Livre) livre).getSection().get(livre.getTete());
+		Section root=((Livre) livre).getSection().get(livre.getTete());
 		
 		List<String> TouteSections=new ArrayList<>();
 		for (Entry<String, Section> entry : ((Livre) livre).getSection().entrySet()) {
 			TouteSections.add(entry.getValue().getNom());
 		}
-		TouteSections.remove(teteSection.getNom());
+		TouteSections.remove(root.getNom());
 		
 		/*
 		List<String> atteignable=new ArrayList<>();
@@ -48,31 +48,31 @@ public class Analyse implements IAnalyse{
 			
 		}*/
 		
-		int nb=1000;
+		int nb=10000;
 		
-		List<String> atteignable=new ArrayList<>();
+		List<String> discovered=new ArrayList<>();
 		List<String> file=new ArrayList<>();
-		atteignable.add(teteSection.getNom());
-		file.add(teteSection.getNom());
+		discovered.add(root.getNom());
+		file.add(root.getNom());
 		while(!file.isEmpty()) {
 			String section=file.get(0);
 			file.remove(0);
-			TouteSections.remove(section);
+			
 			
 			if(TouteSections.isEmpty()||nb<0) {
-				break;
+				return discovered;
 			}
+			TouteSections.remove(section);
 			nb--;
-			
 			for(String nom:((Livre) livre).getSection().get(section).getNextAtteignable()) {
-				if(!atteignable.contains(nom)) {
-					atteignable.add(nom);
+				if(!discovered.contains(nom)) {
+					discovered.add(nom);
 					file.add(nom);
 				}
 			}
 		}
+		return discovered;
 		
-		return atteignable;
 	}
 
 	@Override
