@@ -102,7 +102,27 @@ public class Section extends ObjectConteners implements ISection {
 	public String getNom() {
 		return super.nom;
 	}
-
+	public List<Enchainement> getEnchainementSource(){
+		ArrayList<Enchainement> list=new ArrayList<>();
+		for (Entry<String, Enchainement> entry : livre.getEnchainement().entrySet()) {
+			if(entry.getValue().getSource().equals(this.nom)) {
+				list.add(entry.getValue());
+			}
+		}
+		
+		return list;
+	}
+	
+	public List<Enchainement> getEnchainementDestination(){
+		ArrayList<Enchainement> list=new ArrayList<>();
+		for (Entry<String, Enchainement> entry : livre.getEnchainement().entrySet()) {
+			if(entry.getValue().getDestination().equals(this.nom)) {
+				list.add(entry.getValue());
+			}
+		}
+		
+		return list;
+	}
 	/** 
 	* (non-Javadoc)
 	* @see ISection#setNom(String nom)
@@ -139,7 +159,8 @@ public class Section extends ObjectConteners implements ISection {
 		*/
 		return atteignable;
 	}
-
+	
+	
 	/** 
 	* (non-Javadoc)
 	* @see ISection#addObjet()
@@ -160,8 +181,11 @@ public class Section extends ObjectConteners implements ISection {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+
+	@Override
 	public String getText() {
+		// TODO Auto-generated method stub
 		return this.texte;
 	}
 
