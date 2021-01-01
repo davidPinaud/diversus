@@ -559,9 +559,9 @@ public class Parser implements IParser {
 			"  <p>Où choisissez vous de vous rendre ?</p>\n" +
 			"  <ul>\n";
 			for(Enchainement e : value.getEnchainementSource()) {
-				str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> </li>\\n";
+				str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> </li>";
 			}
-			str2 = str2 +"  </ul>\n" +
+			str2 = str2 +"  </ul>" +
 			"</body>\n" +
 			"</html>\n" +
 			"";
