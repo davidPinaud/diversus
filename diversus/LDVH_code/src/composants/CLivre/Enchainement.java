@@ -8,6 +8,7 @@ import itf.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.Map.Entry;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -161,9 +162,8 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 		if(this.getObjets().isEmpty()) {
 			sBuilder.append("Pas d'objets");
 		}else {
-			Iterator it=this.getObjets().iterator();
-			while(it.hasNext()) {
-				sBuilder.append(it.next().toString()+" ");
+			for (IObjet entry:this.getObjets()) {
+				sBuilder.append(entry.getNom()+" ");
 			}
 		}
 		sBuilder.append("\n\n");

@@ -73,8 +73,8 @@ public class Livre implements ILivre {
 	}
 
 	@Override
-	public Set<String> getObjets() {
-		return objets.keySet();
+	public HashMap<String,Objets> getObjets() {
+		return this.objets;
 	}
 
 	@Override
@@ -189,9 +189,8 @@ public class Livre implements ILivre {
 		if(this.getObjets().isEmpty()) {
 			sb.append("Pas d'objets");
 		}else {
-			Iterator it=this.getObjets().iterator();
-			while(it.hasNext()) {
-				sb.append(it.next()+"|");
+			for (Entry<String, Objets> entry : this.getObjets().entrySet()) {
+				sb.append(entry.getValue().getNom()+" ");
 			}
 		}
 		return sb.toString();

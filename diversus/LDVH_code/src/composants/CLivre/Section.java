@@ -205,9 +205,8 @@ public class Section extends ObjectConteners implements ISection {
 		if(this.getObjets().isEmpty()) {
 			sBuilder.append("Pas d'objets");
 		}else {
-			Iterator it=this.getObjets().iterator();
-			while(it.hasNext()) {
-				sBuilder.append(it.next()+"|");
+			for (IObjet entry:this.getObjets()) {
+				sBuilder.append(entry.getNom()+" ");
 			}
 		}
 		sBuilder.append("\n\n");

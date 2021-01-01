@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import composants.CLivre.Objets;
+
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
@@ -65,7 +67,7 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set<String> getObjets();
+	public HashMap<String, Objets> getObjets();
 
 	/** 
 	* <!-- begin-UML-doc -->
