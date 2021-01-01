@@ -160,6 +160,10 @@ public class Section extends ObjectConteners implements ISection {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public String getText() {
+		return this.texte;
+	}
 
 
 }
