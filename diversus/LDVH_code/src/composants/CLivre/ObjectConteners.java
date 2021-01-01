@@ -66,9 +66,14 @@ public class ObjectConteners {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void deleteObjet(IObjet o) {
-		
+	public void deleteObjet(IObjet o) throws Exception{
+		if ( ! (o instanceof Objets)) {
+			throw new Exception(" problème d'argument dans AddObjet, doit être un instance de Objets");
+		}
+		Objets ob=(Objets) o;
+		ob.deleteContaner(this);
 		objets.remove(o);
+		
 		System.out.println(" Objet "+ o.getNom()+ " supprimé du conteneur "+nom);
 	}
 	public void setNom(String nom) {

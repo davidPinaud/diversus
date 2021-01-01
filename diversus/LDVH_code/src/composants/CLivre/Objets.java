@@ -41,13 +41,25 @@ public class Objets implements IObjet {
 	*/
 	public void deleteObjet() {
 		for (ObjectConteners o: contaners) {
-			o.deleteObjet(this);
+			try {
+				o.deleteObjet(this);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println( "this is not supposed to happen");
+			}
 		}
 	}
 
 	public void addContener(ObjectConteners o) {
 		
 		contaners.add(o);
+	}
+	public void deleteContaner(ObjectConteners o) {
+		if (contaners.contains(o)) {
+			int i =contaners.indexOf(o);
+			contaners.remove(i);
+		}
 	}
 
 
