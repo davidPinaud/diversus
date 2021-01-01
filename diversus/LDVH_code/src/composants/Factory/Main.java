@@ -3,6 +3,7 @@
  */
 package composants.Factory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +14,7 @@ import composants.CLivre.GestLivres;
 import composants.CLivre.Livre;
 import composants.CLivre.Objets;
 import composants.CLivre.Section;
+import composants.CParser.Parser;
 import itf.*;
 
 /** 
@@ -30,7 +32,7 @@ public class Main {
 	IParser parser = CFactory.createParser();
 	GestIHM ihm = CFactory.createIHM();*/
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		demoA();
 	}
 	
@@ -46,24 +48,41 @@ public class Main {
 	 * 	B-->C
 	 * 		Objet "épée"
 	 * 	A-->B
+	 * 	A-->D
+	 * 		Objet "Bouclier"
 	 * 1 Objet
+	 * @throws IOException 
 	 */
-	public static void demoA() {
+	public static void demoA() throws IOException {
 		GestLivres gestLivres=(GestLivres) CFactory.createGestLivre();
 		gestLivres.addLivre("DemoA","Test");
 		Livre livreDEMOA=(Livre) gestLivres.getLivre("DemoA");
 		livreDEMOA.createSection("Entrée", "Section A");
 		livreDEMOA.createSection("Milieu", "Section B");
-		System.out.println(livreDEMOA.etatLivre());
 		livreDEMOA.createSection("Sortie", "Section C");
+		livreDEMOA.createSection("a coté", "Section D");
+		livreDEMOA.setTetedesection(livreDEMOA.getSection().get("Section A"));
+		livreDEMOA.getSection().get("Section A").setTete(true);
 		livreDEMOA.createObject("épée");
+		livreDEMOA.createObject("Bouclier");
 		livreDEMOA.getSection().get("Section B").addObjet(livreDEMOA.getObjets().get("épée"));
+		livreDEMOA.getSection().get("Section A").addObjet(livreDEMOA.getObjets().get("Bouclier"));
 		List<IObjet> list=new ArrayList<>();
 		list.add((IObjet)livreDEMOA.getObjets().get("épée"));
-		livreDEMOA.createEnchainement("A-->B","Je vais au milieu",(ISection) livreDEMOA.getSection().get("Section A"),(ISection) livreDEMOA.getSection().get("Section B"),list);
-		livreDEMOA.createEnchainement("B-->C","Je vais à la fin",(ISection) livreDEMOA.getSection().get("Section B"),(ISection) livreDEMOA.getSection().get("Section C"), new ArrayList<IObjet>());
+		List<IObjet> list2=new ArrayList<>();
+		list2.add((IObjet)livreDEMOA.getObjets().get("Bouclier"));
+		livreDEMOA.createEnchainement("A-->B","Je vais au milieu",(ISection) livreDEMOA.getSection().get("Section A"),(ISection) livreDEMOA.getSection().get("Section B"),new ArrayList<IObjet>());
+		livreDEMOA.createEnchainement("B-->C","Je vais à la fin",(ISection) livreDEMOA.getSection().get("Section B"),(ISection) livreDEMOA.getSection().get("Section C"), list);
+		livreDEMOA.createEnchainement("A-->D","Je vais à coté",(ISection) livreDEMOA.getSection().get("Section A"),(ISection) livreDEMOA.getSection().get("Section D"),list2);
 		System.out.println("*****************************\n"+livreDEMOA.etatLivre());
-		//System.out.println("Analyse : ");
+		Analyse analyse=(Analyse) CFactory.createAnalyse(livreDEMOA);
+		List<String> atteignables=analyse.Analyser_graphe();
+		System.out.println("\nSections atteignables :");
+		for(String s:atteignables) {
+			System.out.print(s+" ");
+		}
+		Parser p = new Parser();
+		p.generateHTML(livreDEMOA);
 	}
 	public void demoB() {
 		System.out.println();

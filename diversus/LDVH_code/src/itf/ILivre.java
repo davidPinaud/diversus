@@ -157,9 +157,10 @@ public interface ILivre {
 	* <!-- end-UML-doc -->
 	* @param nom
 	* @return
+	 * @throws Exception 
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Boolean SectionExist(String nom);
+	public Boolean SectionExist(String nom) throws Exception;
 
 	/** 
 	* <!-- begin-UML-doc -->
