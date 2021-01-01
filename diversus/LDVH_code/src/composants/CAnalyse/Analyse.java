@@ -34,16 +34,23 @@ public class Analyse implements IAnalyse{
 		
 		List<Section> TouteSections=new ArrayList<>();
 		for (Entry<String, Section> entry : ((Livre) livre).getSection().entrySet()) {
-			TouteSections.add(entry.getValue());
+			TouteSections.add(entry.getValue().getNom());
 		}
-		TouteSections.remove(teteSection);
+		TouteSections.remove(teteSection.getNom());
 		
 		List<String> atteignable=new ArrayList<>();
 		atteignable.add(teteSection.getNom());
 		
 		int nb=50000;
-		while(nb>0 && !TouteSections.isEmpty())
-		teteSection.getNextAtteignable();
+		List<String> teteAtteignable =teteSection.getNextAtteignable();
+		for(String s:teteSection.getNextAtteignable()) {
+			if
+		}
+		while(nb>0 && !TouteSections.isEmpty()) {
+			
+			nb--;
+		}
+		
 		
 		
 		
