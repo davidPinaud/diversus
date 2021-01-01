@@ -5,6 +5,7 @@ package composants.CLivre;
 
 import itf.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -144,6 +145,29 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	public void AddObjet(String Objet) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String etatEnchainement() {
+		StringBuilder sBuilder=new StringBuilder();
+		sBuilder.append("nom : ");
+		sBuilder.append(this.nom+" \n");
+		sBuilder.append("description : ");
+		sBuilder.append(this.texte+" \n");
+		sBuilder.append("source : ");
+		sBuilder.append(this.getSource()+"\n");
+		sBuilder.append("destination : ");
+		sBuilder.append(this.getDestination()+"\n");
+		sBuilder.append("objets : ");
+		if(this.getObjets().isEmpty()) {
+			sBuilder.append("Pas d'objets");
+		}else {
+			Iterator it=this.getObjets().iterator();
+			while(it.hasNext()) {
+				sBuilder.append(it.next().toString()+" ");
+			}
+		}
+		sBuilder.append("\n\n");
+		return sBuilder.toString();
 	}
 
 	/** 

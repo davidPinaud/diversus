@@ -62,6 +62,9 @@ public class Objets implements IObjet {
 		}
 	}
 
+	public String toString() {
+		return this.nom_objet;
+	}
 
 
 }

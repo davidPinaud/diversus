@@ -9,6 +9,7 @@ import itf.ISection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -187,6 +188,30 @@ public class Section extends ObjectConteners implements ISection {
 	public String getText() {
 		// TODO Auto-generated method stub
 		return this.texte;
+	}
+	
+	public void setText(String texte) {
+		this.texte=texte;
+	}
+
+
+	public String etatSection() {
+		StringBuilder sBuilder=new StringBuilder();
+		sBuilder.append("nom : ");
+		sBuilder.append(this.nom+" \n");
+		sBuilder.append("description : ");
+		sBuilder.append(this.texte+" \n");
+		sBuilder.append("objets : \n");
+		if(this.getObjets().isEmpty()) {
+			sBuilder.append("Pas d'objets");
+		}else {
+			Iterator it=this.getObjets().iterator();
+			while(it.hasNext()) {
+				sBuilder.append(it.next()+"|");
+			}
+		}
+		sBuilder.append("\n\n");
+		return sBuilder.toString();
 	}
 
 

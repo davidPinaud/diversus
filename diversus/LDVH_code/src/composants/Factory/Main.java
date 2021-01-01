@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import composants.CIHM.GestIHM;
+import composants.CLivre.GestLivres;
 import composants.CLivre.Livre;
 import composants.CLivre.Objets;
 import itf.*;
@@ -28,7 +29,7 @@ public class Main {
 	GestIHM ihm = CFactory.createIHM();*/
 	
 	public static void main(String[] args) {
-		
+		demoA();
 	}
 	
 	/**
@@ -45,8 +46,10 @@ public class Main {
 	 * 	A-->B
 	 * 1 Objet
 	 */
-	public void demoA() {
-		Livre livreDEMOA=(Livre) CFactory.createLivre("DemoA","Test");
+	public static void demoA() {
+		GestLivres gestLivres=(GestLivres) CFactory.createGestLivre();
+		gestLivres.addLivre("DemoA","Test");
+		Livre livreDEMOA=(Livre) gestLivres.getLivre("DemoA");
 		livreDEMOA.createSection("Entrée", "Section A");
 		livreDEMOA.createSection("Milieu", "Section B");
 		livreDEMOA.createSection("Sortie", "Section C");
@@ -58,7 +61,7 @@ public class Main {
 		}
 		livreDEMOA.AddEnchainement("A-->B","Je vais au milieu",(ISection) livreDEMOA.getSection().get("Section A"),(ISection) livreDEMOA.getSection().get("Section B"),list);
 		livreDEMOA.AddEnchainement("B-->C","Je vais à la fin",(ISection) livreDEMOA.getSection().get("Section B"),(ISection) livreDEMOA.getSection().get("Section C"), new ArrayList<String>());
-		System.out.println(livreDEMOA.toString());
+		System.out.println(livreDEMOA.etatLivre());
 	}
 	public void demoB() {
 		System.out.println();

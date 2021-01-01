@@ -15,7 +15,7 @@ public class GestLivres implements IGestLivre {
 		// TODO Auto-generated method stub
 		ILivre livre=new Livre(nom, auteur);
 		livres.put(nom,livre);
-		System.out.println(livre.toString()+ " a été crée");
+		//System.out.println(livre.toString()+ " a été crée");
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class GestLivres implements IGestLivre {
 	public void deleteLivre(String titre) {
 		// TODO Auto-generated method stub
 		livres.remove(titre);
-		System.out.println("Le livre "+titre+ " a été supprimé");
+		//System.out.println("Le livre "+titre+ " a été supprimé");
 	}
 
 }
