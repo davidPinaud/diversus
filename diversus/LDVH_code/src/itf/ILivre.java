@@ -32,7 +32,7 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public String createSection(String test, Boolean isAtteignable, String nom);
+	public String createSection(String test, String nom);
 
 	/** 
 	* <!-- begin-UML-doc -->

@@ -3,7 +3,13 @@
  */
 package composants.Factory;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import composants.CIHM.GestIHM;
+import composants.CLivre.Livre;
+import composants.CLivre.Objets;
 import itf.*;
 
 /** 
@@ -14,10 +20,60 @@ import itf.*;
  */
 public class Main {
 
-	IAffichageGraphique ag = CFactory.createAffichageGraphique();
+	/*IAffichageGraphique ag = CFactory.createAffichageGraphique();
 	IAnalyse analyse = CFactory.createAnalyse();
 	ILivre livre = CFactory.createLivre("livre");
 	ILivreController controller = CFactory.createController();
 	IParser parser = CFactory.createParser();
-	GestIHM ihm = CFactory.createIHM();
+	GestIHM ihm = CFactory.createIHM();*/
+	
+	public static void main(String[] args) {
+		
+	}
+	
+	/**
+	 * DemoA :
+	 * Creer un livre
+	 * Ajouter 3 sections
+	 * 	Section A
+	 * 	Section B
+	 * 		Objet "épée"
+	 * 	Section C
+	 * 2 enchainements
+	 * 	B-->C
+	 * 		Objet "épée"
+	 * 	A-->B
+	 * 1 Objet
+	 */
+	public void demoA() {
+		Livre livreDEMOA=(Livre) CFactory.createLivre("DemoA","Test");
+		livreDEMOA.createSection("Entrée", "Section A");
+		livreDEMOA.createSection("Milieu", "Section B");
+		livreDEMOA.createSection("Sortie", "Section C");
+		livreDEMOA.createObject("épée");
+		List<String> list=new ArrayList<>();
+		Iterator<String> iterator=livreDEMOA.getObjets().iterator();
+		while(iterator.hasNext()) {
+			list.add(iterator.next());
+		}
+		livreDEMOA.AddEnchainement("A-->B","Je vais au milieu",(ISection) livreDEMOA.getSection().get("Section A"),(ISection) livreDEMOA.getSection().get("Section B"),list);
+		livreDEMOA.AddEnchainement("B-->C","Je vais à la fin",(ISection) livreDEMOA.getSection().get("Section B"),(ISection) livreDEMOA.getSection().get("Section C"), new ArrayList<String>());
+		System.out.println(livreDEMOA.toString());
+	}
+	public void demoB() {
+		System.out.println();
+	}
+	public void demoC() {
+		System.out.println();
+	}
+	public void demoD() {
+		System.out.println();
+	}
+	public void demoE() {
+		System.out.println();
+	}
+	public void demoF() {
+		System.out.println();
+	}
+	
 }

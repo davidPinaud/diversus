@@ -45,9 +45,12 @@ public class Livre implements ILivre {
 	//private HashMap<String,Enchainement> enchainement2;
 
 	
-
+	public Livre(String titre,String auteur) {
+		this.titre=titre;
+		this.auteur=auteur;
+	}
 	@Override
-	public String createSection(String texte, Boolean isAtteignable, String nom) {
+	public String createSection(String texte, String nom) {
 		Section sec=new Section(0,nom,texte ,this,  new ArrayList<IObjet>());
 		section.put(nom, sec);
 		return nom;
