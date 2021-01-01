@@ -559,7 +559,12 @@ public class Parser implements IParser {
 			"  <p>Où choisissez vous de vous rendre ?</p>\n" +
 			"  <ul>\n";
 			for(Enchainement e : value.getEnchainementSource()) {
-				str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> </li>";
+				str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> : "+e.getTexte()+"<br>( objets requis : ";
+				for(IObjet o : e.getObjets()) {
+					str2 = str2 + o.getNom() + " ";
+				}
+				str2 = str2 + ")</li>";
+				
 			}
 			str2 = str2 +"  </ul>" +
 			"</body>\n" +
