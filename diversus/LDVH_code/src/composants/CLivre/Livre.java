@@ -56,9 +56,12 @@ public class Livre implements ILivre {
 	}
 	@Override
 	public String createSection(String texte, String nom) {
-		Section sec=new Section(0,nom,texte ,this,  new ArrayList<IObjet>());
-		section.put(nom, sec);
-		return nom;
+		if(!SectionExist(nom)) {
+			Section sec=new Section(0,nom,texte ,this,  new ArrayList<IObjet>());
+			section.put(nom, sec);
+			return nom;
+		}
+		return null;
 	}
 
 	@Override
@@ -85,19 +88,22 @@ public class Livre implements ILivre {
 
 	@Override
 	public void AddEnchainement(String nom, String description, ISection src, ISection dst, List<String> objetsList) {
-		ArrayList<IObjet> listObjets=new ArrayList<>();
-		for(String obString:objetsList) {
-			listObjets.add(objets.get(obString));
+		if(!this.getEnchainement().containsKey(nom)) {
+			ArrayList<IObjet> listObjets=new ArrayList<>();
+			for(String obString:objetsList) {
+				listObjets.add(objets.get(obString));
+			}
+			Enchainement e=new Enchainement(nom, description, src, dst, listObjets);
+			enchainement.put(e.getNom(), e);
 		}
-		Enchainement e=new Enchainement(nom, description, src, dst, listObjets);
-		enchainement.put(e.getNom(), e);
 	}
 	
 	@Override
 	public void createEnchainement(String texte, String nom, ISection src, ISection dst, List<IObjet> objets) {
-		Enchainement e=new Enchainement(nom, texte, src, dst, objets);
-		enchainement.put(e.getNom(), e);
-		
+		if(!this.getEnchainement().containsKey(nom)) {
+			Enchainement e=new Enchainement(nom, texte, src, dst, objets);
+			enchainement.put(e.getNom(), e);
+		}
 	}
 	
 	@Override
