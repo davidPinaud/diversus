@@ -3,7 +3,6 @@
  */
 package itf;
 
-import java.util.List;
 import java.util.Set;
 
 /** 
@@ -19,7 +18,7 @@ public interface IAnalyse {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public List<String> Analyser_graphe();
+	public Set<String> Analyser_graphe();
 
 	/** 
 	* <!-- begin-UML-doc -->

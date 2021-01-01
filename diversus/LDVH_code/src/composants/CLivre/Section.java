@@ -44,7 +44,6 @@ public class Section extends ObjectConteners implements ISection {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private boolean isTete;
 	private Integer idSection;
 	/** 
 	* <!-- begin-UML-doc -->
@@ -139,19 +138,13 @@ public class Section extends ObjectConteners implements ISection {
 	* @see ISection#getNextAtteignable(String nom)
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public List<String>  getNextAtteignable() {
-		//System.out.println("Atteignable Sections :"+this.getNom());
+	public List<String>  getNextAtteignable(String nom) {
 		List<String>  atteignable= new ArrayList<String>();
 		HashMap<String, Enchainement> en=livre.getEnchainement();
 		for (Entry<String, Enchainement> entry : en.entrySet()) {
             Enchainement e=entry.getValue();
-            
             if(e.getSource().equals(this.nom)) {
-            	/*System.out.println("Source de "+e.getNom());
-            	System.out.println("Objet dispo "+this.getObjets());
-            	System.out.println("Objet necessaire "+e.getObjets());*/
-            	if(this.getObjets().containsAll(e.getObjets())||e.getObjets().isEmpty()) {
-            		//System.out.println("in");
+            	if(this.getObjets().containsAll(e.getObjets())) {
             		atteignable.add(e.getDestination());
             	}
             }
@@ -201,20 +194,13 @@ public class Section extends ObjectConteners implements ISection {
 		this.texte=texte;
 	}
 
-	public void setTete(boolean bool) {
-		this.isTete=bool;
-	}
-	public boolean getTete() {
-		return this.isTete;
-	}
+
 	public String etatSection() {
 		StringBuilder sBuilder=new StringBuilder();
 		sBuilder.append("nom : ");
 		sBuilder.append(this.nom+" \n");
 		sBuilder.append("description : ");
 		sBuilder.append(this.texte+" \n");
-		sBuilder.append("isTête : ");
-		sBuilder.append(this.isTete+" \n");
 		sBuilder.append("objets : \n");
 		if(this.getObjets().isEmpty()) {
 			sBuilder.append("Pas d'objets");

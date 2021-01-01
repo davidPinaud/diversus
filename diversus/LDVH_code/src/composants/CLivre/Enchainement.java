@@ -76,9 +76,7 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	public String getSource() {
 		return section1.getNom();
 	}
-	public String getTexte() {
-		return this.texte;
-	}
+
 	/** 
 	* (non-Javadoc)
 	* @see IEnchainement#getDestination()
@@ -128,13 +126,6 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	*/
 	public void setSrc(ISection src) {
 		this.section1 = src;
-	}
-	
-	public ISection getSourceSection() {
-		return this.section1;
-	}
-	public ISection getDestinationSection() {
-		return this.section2;
 	}
 
 	/** 
