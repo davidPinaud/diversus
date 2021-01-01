@@ -4850,6 +4850,10 @@
           <ownedParameter xmi:id="_owfjAEr4EeuRsqZWmdWGBQ" name="nom" type="_KWvGQEeKEeuROrqyRANNnw"/>
           <ownedParameter xmi:id="_owgKEEr4EeuRsqZWmdWGBQ" name="Parameter1" type="_dP5jwErvEeuRsqZWmdWGBQ" direction="return"/>
         </ownedOperation>
+        <ownedOperation xmi:id="_e0BwMEx0Eeu08czikaP7WQ" name="ModifyAutor"/>
+        <ownedOperation xmi:id="_jnA-EEx0Eeu08czikaP7WQ" name="getAutor">
+          <ownedParameter xmi:id="_lou-MEx0Eeu08czikaP7WQ" name="titre" type="_KWvGQEeKEeuROrqyRANNnw"/>
+        </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Interface" xmi:id="_rERYEC6fEeu45NjBeVsWmg" name="ISection">
         <ownedOperation xmi:id="_2eBaYC6mEeu45NjBeVsWmg" name="getNom">
