@@ -52,5 +52,5 @@ public interface ISection {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public List<IObjet> getNextAtteignable(String nom);
+	public List<String> getNextAtteignable(String nom);
 }

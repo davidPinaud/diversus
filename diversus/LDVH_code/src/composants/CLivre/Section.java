@@ -8,6 +8,7 @@ import itf.ISection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -122,7 +123,9 @@ public class Section extends ObjectConteners implements ISection {
 		for (Entry<String, Enchainement> entry : en.entrySet()) {
             Enchainement e=entry.getValue();
             if(e.getSource().equals(this.nom)) {
-            	atteignable.add(this.nom);
+            	if(this.getObjetsDeContener().containsAll(e.getObjets())) {
+            		atteignable.add(this.nom);
+            	}
             }
 		}
 		
@@ -149,5 +152,22 @@ public class Section extends ObjectConteners implements ISection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+
+	@Override
+	public Boolean getIsAtteignable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Set<String> getObjets() {
+		Set<String> set=new HashSet<String>();
+		for(IObjet objet:this.getObjetsDeContener()) {
+			set.add(objet.getNom());
+		}
+		return set;
 	}
 }
