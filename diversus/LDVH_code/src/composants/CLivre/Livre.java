@@ -3,8 +3,10 @@
  */
 package composants.CLivre;
 
+import java.net.PasswordAuthentication;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -48,6 +50,9 @@ public class Livre implements ILivre {
 	public Livre(String titre,String auteur) {
 		this.titre=titre;
 		this.auteur=auteur;
+		this.section=new HashMap<>();
+		this.objets=new HashMap<>();
+		this.enchainement=new HashMap<>();
 	}
 	@Override
 	public String createSection(String texte, String nom) {
@@ -68,8 +73,8 @@ public class Livre implements ILivre {
 	}
 
 	@Override
-	public Set<String> getObjets() {
-		return objets.keySet();
+	public HashMap<String,Objets> getObjets() {
+		return this.objets;
 	}
 
 	@Override
@@ -167,6 +172,29 @@ public class Livre implements ILivre {
 		return sb.toString();
 	}
 	
+	public String etatLivre() {
+		StringBuilder sb=new StringBuilder();
+		sb.append("Titre : "+this.titre+"\nAuteur : "+this.auteur+"\n\n");
+		sb.append("Sections : \n\n");
+		for (Entry<String, Section> entry : this.getSection().entrySet()) {
+			sb.append(entry.getValue().etatSection());
+		}
+		sb.append("----------------------------------------\n");
+		sb.append("Enchainements : \n\n");
+		for (Entry<String, Enchainement> entry : this.getEnchainement().entrySet()) {
+			sb.append(entry.getValue().etatEnchainement());
+		}
+		sb.append("----------------------------------------\n");
+		sb.append("Objets : ");
+		if(this.getObjets().isEmpty()) {
+			sb.append("Pas d'objets");
+		}else {
+			for (Entry<String, Objets> entry : this.getObjets().entrySet()) {
+				sb.append(entry.getValue().getNom()+" ");
+			}
+		}
+		return sb.toString();
+	}
 	
 	@Override
 	public boolean deleteObjet(String nom){

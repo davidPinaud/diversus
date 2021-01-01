@@ -58,7 +58,7 @@ public class ObjectConteners {
 ;		
 		ob.addContener(this);
 		objets.add(o);
-		System.out.println(" Objet "+ o.getNom()+ " ajouté au conteneur "+nom);
+		//System.out.println(" Objet "+ o.getNom()+ " ajouté au conteneur "+nom);
 	}
 
 	/** 
@@ -74,7 +74,7 @@ public class ObjectConteners {
 		ob.deleteContaner(this);
 		objets.remove(o);
 		
-		System.out.println(" Objet "+ o.getNom()+ " supprimé du conteneur "+nom);
+		//System.out.println(" Objet "+ o.getNom()+ " supprimé du conteneur "+nom);
 	}
 	public void setNom(String nom) {
 		this.nom=nom;

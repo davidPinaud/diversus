@@ -23,7 +23,7 @@ public class Analyse implements IAnalyse{
 	}
 	@Override
 	public Set<String> Analyser_graphe() {
-		return null;
+		
 	}
 
 	@Override

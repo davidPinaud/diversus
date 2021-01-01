@@ -5,8 +5,10 @@ package composants.CLivre;
 
 import itf.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.Map.Entry;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -144,6 +146,28 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	public void AddObjet(String Objet) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String etatEnchainement() {
+		StringBuilder sBuilder=new StringBuilder();
+		sBuilder.append("nom : ");
+		sBuilder.append(this.nom+" \n");
+		sBuilder.append("description : ");
+		sBuilder.append(this.texte+" \n");
+		sBuilder.append("source : ");
+		sBuilder.append(this.getSource()+"\n");
+		sBuilder.append("destination : ");
+		sBuilder.append(this.getDestination()+"\n");
+		sBuilder.append("objets : ");
+		if(this.getObjets().isEmpty()) {
+			sBuilder.append("Pas d'objets");
+		}else {
+			for (IObjet entry:this.getObjets()) {
+				sBuilder.append(entry.getNom()+" ");
+			}
+		}
+		sBuilder.append("\n\n");
+		return sBuilder.toString();
 	}
 
 	/** 
