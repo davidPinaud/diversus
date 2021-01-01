@@ -2,9 +2,7 @@ package livreTests;
 import static org.junit.Assert.*;
 
 
-
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,92 +11,12 @@ import composants.CLivre.Livre;
 import composants.Factory.CFactory;
 import itf.*;
 public class EnchainementTest {
-	IGestLivre gest;
 	ILivre livre ;
-	ILivre livre2;
-	ISection sectionVillage;
-	ISection sectionDonjon;
-	ISection sectionBoutique;
-	List<ILivre> listeLivres;
 	@Before
-	
 	public void setUp() {
-		gest=CFactory.createGestLivre();
-		
-		
+		 livre = CFactory.createLivre("Zèle");
 		 
 	}
-	@Test
-	public void creerLivres() {
-		gest.addLivre("Dream" , "felina");
-		livre =gest.getLivre("Dream");
-		// tester que le livre a été créé
-		listeLivres=gest.getLivres();
-		assertTrue(listeLivres.contains(livre));
-		// ajout d'un deuxième livre
-		gest.addLivre("Corbeau" , "Lafontaine");
-		livre2 =gest.getLivre("Corbeau");
-		listeLivres=gest.getLivres();
-		assertTrue(listeLivres.contains(livre2));
-		assertTrue(gest.contains("Dream"));
-		
-		assertEquals(livre, gest.getLivre("Dream"));
-		assertEquals(livre2, gest.getLivre("Corbeau"));
-		
-	}
-	
-	
-
-	
-/*	@Test(expected=Exception.class)
-	// livre déjà présent
-	public void creerLivreExistant() {
-		gest.addLivre("Dream", "Inas");
-	}*/
-	@Test
-	public void modifierLivre() {
-		ILivre livre3 =gest.getLivre("Dream");
-		livre3.
-		
-	}
-	
-
-	@Test
-	public void supprimerLivre() {
-		gest.deleteLivre("Corbeau");
-		assertFalse(gest.contains("Corbeau"));
-	}
-	
-	@Test
-	// long test
-	public void AddDeleteLivre() {
-		gest.addLivre("A" , "felina");
-		gest.addLivre("B" , "felina");
-		gest.addLivre("C" , "felina");
-		gest.addLivre("D" , "felina");
-		
-		assertTrue(gest.contains("A"));
-		assertTrue(gest.contains("B"));
-		assertTrue(gest.contains("C"));
-		assertTrue(gest.contains("D"));
-		
-		gest.deleteLivre("C");
-		assertFalse(gest.contains("C"));
-		assertTrue(gest.contains("A"));
-		assertTrue(gest.contains("B"));
-		assertTrue(gest.contains("D"));
-		
-		gest.deleteLivre("A");
-		assertFalse(gest.contains("A"));
-		gest.deleteLivre("B");
-		gest.deleteLivre("D");
-		assertFalse(gest.contains("B"));
-		assertFalse(gest.contains("D"));
-		
-		
-		
-	}
-	/*
     @Test
     public void editerLivreTest(){
 
@@ -210,7 +128,7 @@ public class EnchainementTest {
 		assertEquals(livre.getEnchainements().isEmpty(), true);
 	}
 
-*/
+
 	
 
 }
