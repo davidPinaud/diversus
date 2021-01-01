@@ -32,7 +32,7 @@ public class ObjectConteners {
 	public String getNom() {
 		return nom;
 	}
-	public List<IObjet> getObjetsDeContener() {
+	public List<IObjet> getObjets() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return objets;

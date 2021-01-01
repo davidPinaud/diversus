@@ -139,10 +139,6 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 		return id;
 		}
 
-	@Override
-	public List<IObjet> getObjets() {
-		return this.getObjetsDeContener();
-	}
 
 	@Override
 	public void AddObjet(String Objet) {

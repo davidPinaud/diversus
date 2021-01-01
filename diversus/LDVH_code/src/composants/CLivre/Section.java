@@ -123,8 +123,8 @@ public class Section extends ObjectConteners implements ISection {
 		for (Entry<String, Enchainement> entry : en.entrySet()) {
             Enchainement e=entry.getValue();
             if(e.getSource().equals(this.nom)) {
-            	if(this.getObjetsDeContener().containsAll(e.getObjets())) {
-            		atteignable.add(this.nom);
+            	if(this.getObjets().containsAll(e.getObjets())) {
+            		atteignable.add(e.getDestination());
             	}
             }
 		}
@@ -154,7 +154,7 @@ public class Section extends ObjectConteners implements ISection {
 		}
 	}
 
-
+	
 	@Override
 	public Boolean getIsAtteignable() {
 		// TODO Auto-generated method stub
@@ -162,12 +162,4 @@ public class Section extends ObjectConteners implements ISection {
 	}
 
 
-	@Override
-	public Set<String> getObjets() {
-		Set<String> set=new HashSet<String>();
-		for(IObjet objet:this.getObjetsDeContener()) {
-			set.add(objet.getNom());
-		}
-		return set;
-	}
 }

@@ -43,7 +43,7 @@ public interface ISection {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set<String> getObjets();
+	public List<IObjet> getObjets();
 
 	/** 
 	* <!-- begin-UML-doc -->
