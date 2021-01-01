@@ -14,13 +14,7 @@ import java.util.Set;
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public interface ILivre {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param Jungle
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void CheckGrapheAcceptable(Object Jungle);
+
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -28,7 +22,6 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public HashMap<String, ISection> listerSections();
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -87,7 +80,6 @@ public interface ILivre {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void ChargerOngletEchainement();
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -117,7 +109,6 @@ public interface ILivre {
 	* @param id
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void selectEnchainement(int id);
 
 	/** 
 	* <!-- begin-UML-doc -->

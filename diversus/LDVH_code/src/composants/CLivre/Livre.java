@@ -45,15 +45,6 @@ public class Livre implements ILivre {
 	//private HashMap<String,Enchainement> enchainement2;
 
 	
-	@Override
-	public void CheckGrapheAcceptable(Object Jungle) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public HashMap<String,ISection> listerSections() {
-		return null;
-	}
 
 	@Override
 	public String createSection(String texte, Boolean isAtteignable, String nom) {
@@ -83,10 +74,6 @@ public class Livre implements ILivre {
 		return enchainement.keySet();
 	}
 
-	@Override
-	public void ChargerOngletEchainement() {
-		// TODO Auto-generated method stub
-	}
 
 	@Override
 	public void AddEnchainement(String nom, String description, ISection src, ISection dst, List<String> objetsList) {
@@ -118,8 +105,6 @@ public class Livre implements ILivre {
 		return false;
 	}
 
-	@Override
-	public void selectEnchainement(int id) {}
 
 	@Override
 	public void modifEnchainement(String id, String nom, String description, ISection src, ISection dst,
@@ -192,7 +177,7 @@ public class Livre implements ILivre {
 		
 	}
 	public void addObjet(String nom) {
-		
+		this.objets.put(nom, new Objets(nom));
 	}
 
 	
