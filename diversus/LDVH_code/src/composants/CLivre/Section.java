@@ -7,8 +7,10 @@ import itf.IObjet;
 import itf.ISection;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.Map.Entry;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -115,8 +117,15 @@ public class Section extends ObjectConteners implements ISection {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public List<String>  getNextAtteignable(String nom) {
-		List<Enchainement> en=livre.getEnchainements();
-		List<String>  e= new ArrayList<String>();
+		List<String>  atteignable= new ArrayList<String>();
+		HashMap<String, Enchainement> en=livre.getEnchainement();
+		for (Entry<String, Enchainement> entry : en.entrySet()) {
+            Enchainement e=entry.getValue();
+            if(e.getSource().equals(this.nom)) {
+            	atteignable.add(this.nom);
+            }
+		}
+		
 	/*	for(int i=0; i<en.size();i++)
 		{
 			if(en.get(i).getSource().equals(nom))
@@ -125,7 +134,7 @@ public class Section extends ObjectConteners implements ISection {
 			}
 		}
 		*/
-		return enchainement;
+		return atteignable;
 	}
 
 	/** 
@@ -134,6 +143,11 @@ public class Section extends ObjectConteners implements ISection {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void addObjet(IObjet ob) {
-		super.AddObjet(ob);
+		try {
+			super.AddObjet(ob);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

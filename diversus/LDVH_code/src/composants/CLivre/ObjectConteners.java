@@ -71,4 +71,8 @@ public class ObjectConteners {
 		objets.remove(o);
 		System.out.println(" Objet "+ o.getNom()+ " supprimé du conteneur "+nom);
 	}
+	public void setNom(String nom) {
+		this.nom=nom;
+		
+	}
 }

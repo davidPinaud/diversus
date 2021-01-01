@@ -41,7 +41,7 @@ public class Objets implements IObjet {
 	*/
 	public void deleteObjet() {
 		for (ObjectConteners o: contaners) {
-			o.deleteObjet();
+			o.deleteObjet(this);
 		}
 	}
 
