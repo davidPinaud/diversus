@@ -76,7 +76,9 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	public String getSource() {
 		return section1.getNom();
 	}
-
+	public String getTexte() {
+		return this.texte;
+	}
 	/** 
 	* (non-Javadoc)
 	* @see IEnchainement#getDestination()
