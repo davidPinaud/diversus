@@ -68,10 +68,10 @@ public class CFactory {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public static IAnalyse createAnalyse(ILivre livre, ISection section) {
+	public static IAnalyse createAnalyse(ILivre livre) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		return new Analyse(livre) ;
 		// end-user-code
 	}
 

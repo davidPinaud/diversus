@@ -127,6 +127,13 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	public void setSrc(ISection src) {
 		this.section1 = src;
 	}
+	
+	public ISection getSourceSection() {
+		return this.section1;
+	}
+	public ISection getDestinationSection() {
+		return this.section2;
+	}
 
 	/** 
 	* (non-Javadoc)

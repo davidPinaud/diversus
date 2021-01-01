@@ -138,7 +138,7 @@ public class Section extends ObjectConteners implements ISection {
 	* @see ISection#getNextAtteignable(String nom)
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public List<String>  getNextAtteignable(String nom) {
+	public List<String>  getNextAtteignable() {
 		List<String>  atteignable= new ArrayList<String>();
 		HashMap<String, Enchainement> en=livre.getEnchainement();
 		for (Entry<String, Enchainement> entry : en.entrySet()) {
