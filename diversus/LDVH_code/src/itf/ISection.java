@@ -3,6 +3,7 @@
  */
 package itf;
 
+import java.util.List;
 import java.util.Set;
 
 /** 
@@ -51,5 +52,5 @@ public interface ISection {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set<String> getNextAtteignable(String nom);
+	public List<IObjet> getNextAtteignable(String nom);
 }
