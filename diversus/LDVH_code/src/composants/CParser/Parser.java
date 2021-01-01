@@ -15,7 +15,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import composants.CLivre.Enchainement;
 import composants.CLivre.Livre;
@@ -525,15 +527,16 @@ public class Parser implements IParser {
 
 		
 		//creation de toutes les setions .html
-		HashMap<String, Section> sections = new HashMap<String, Section>();
-		sections.forEach((key, value) -> {
+		HashMap<String, Section> sections = l.getSection();
+		for (Entry<String, Section> entry : sections.entrySet()) {
+			Section value = (Section) entry.getValue();
 			File file2 = new File("./LivreHTML/"+value.getNom()+".html");
 			String str2 = "<!doctype html>\n" +
 					"<html lang=\"fr\">\n" +
 					"<head>\n" +
 					"  <meta charset=\"utf-8\">\n" +
 					"  <title>DVStory by Diversus</title>\n" +
-					"  <link rel=\"stylesheet\" href=\"style.css\">\n" +
+					"  <link rel=\"stylesheet\" href=\"../style.css\">\n" +
 					"  <script src=\"script.js\"></script>\n" +
 					"</head>\n" +
 					"<body>\n" +
@@ -556,10 +559,14 @@ public class Parser implements IParser {
 			"  <p>Où choisissez vous de vous rendre ?</p>\n" +
 			"  <ul>\n";
 			for(Enchainement e : value.getEnchainementSource()) {
-				str2 = str2 + "      <li> <a href=\"./"+e.getNom()+".html\">"+e.getNom()+"</a> </li>\\n";
+				str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> : "+e.getTexte()+"<br>( objets requis : ";
+				for(IObjet o : e.getObjets()) {
+					str2 = str2 + o.getNom() + " ";
+				}
+				str2 = str2 + ")</li>";
+				
 			}
-			str2 = str2 +"  </ul>\n" +
-			"\n" +
+			str2 = str2 +"  </ul>" +
 			"</body>\n" +
 			"</html>\n" +
 			"";
@@ -569,7 +576,7 @@ public class Parser implements IParser {
 			outputStream2.write(strToBytes2);
 			outputStream2.close();
 			}catch(IOException e) {}
-		});
+		}
 		return null;
 	}
 }
