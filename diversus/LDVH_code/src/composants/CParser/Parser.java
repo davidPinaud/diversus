@@ -14,9 +14,12 @@ import itf.IParser;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import composants.CLivre.Enchainement;
 import composants.CLivre.Livre;
+import composants.CLivre.Section;
 import itf.*;
 
 /**
@@ -35,9 +38,18 @@ public class Parser implements IParser {
 
 	@Override
 	public String generateHTML(Livre l) throws IOException {
+		//creation des dossier
 		File file = new File("./LivreHTML");
 		if (!file.exists()) file.mkdir();
+		file = new File("./LivreHTML/"+l.getTitre());
+		if (!file.exists()) file.mkdir();
+		File[] files = file.listFiles();
+		for (File f : files) {
+		   f.delete();
+		} 
 
+		
+		//creation du fichier css
 		file = new File("./LivreHTML/style.css");
 		String str = "/* MVP.css v1.6.3 - https://github.com/andybrewer/mvp */\n" +
 				"\n" +
@@ -505,53 +517,59 @@ public class Parser implements IParser {
 				"  padding: 0;\n" +
 				"}\n" +
 				"";
-
+		
 		FileOutputStream outputStream = new FileOutputStream("./LivreHTML/style.css");
 		byte[] strToBytes = str.getBytes();
 		outputStream.write(strToBytes);
 		outputStream.close();
 
-		file = new File("./LivreHTML/"+l.getTetedesection().getNom()+".html");
-		str = "<!doctype html>\n" +
-				"<html lang=\"fr\">\n" +
-				"<head>\n" +
-				"  <meta charset=\"utf-8\">\n" +
-				"  <title>DVStory by Diversus</title>\n" +
-				"  <link rel=\"stylesheet\" href=\"style.css\">\n" +
-				"  <script src=\"script.js\"></script>\n" +
-				"</head>\n" +
-				"<body>\n" +
-				"  <header>\n" +
-				"    <h1>"+l.getTitre()+"</h1>\n" +
-				"    <ul class=\"inline\" id=\"inventaire\"> inventaire :\n";
-		for(IObjet o : l.getTetedesection().getObjets()) {
-			str = str + "      <li class=\"inline\">"+o.getNom()+"</li>\n";
-		}
-		str = str + "    </ul>\n" +
-				"  </header>\n" +
-				"\n" +
-				"  <h3>"+l.getTetedesection().getNom()+"</h3>\n" +
-				"  <p>"+l.getTetedesection().getText()+"</p>\n" +
-				"  <ul class=\"inline\" id=\"recuperer\">voici les objets que vous venez de récupéré :\n";
-		for(IObjet o : l.getTetedesection().getObjets()) {
-			str = str + "      <li class=\"inline\">"+o.getNom()+"</li>\n";
-		}
-		str = str +"  </ul>\n" +
-		"  <p>Où choisissez vous de vous rendre ?</p>\n" +
-		"  <ul>\n";
-		for(Enchainement e : l.getTetedesection().getEnchainementSource()) {
-			str = str + "      <li> <a href=\"./"+e.getNom()+".html\">SectionN</a> </li>\\n";
-		}
-		str = str +"  </ul>\n" +
-		"\n" +
-		"</body>\n" +
-		"</html>\n" +
-		"";
-		outputStream = new FileOutputStream("./LivreHTML/"+l.getTetedesection().getNom()+".html");
-		strToBytes = str.getBytes();
-		outputStream.write(strToBytes);
-
-		outputStream.close();
+		
+		//creation de toutes les setions .html
+		HashMap<String, Section> sections = new HashMap<String, Section>();
+		sections.forEach((key, value) -> {
+			File file2 = new File("./LivreHTML/"+value.getNom()+".html");
+			String str2 = "<!doctype html>\n" +
+					"<html lang=\"fr\">\n" +
+					"<head>\n" +
+					"  <meta charset=\"utf-8\">\n" +
+					"  <title>DVStory by Diversus</title>\n" +
+					"  <link rel=\"stylesheet\" href=\"style.css\">\n" +
+					"  <script src=\"script.js\"></script>\n" +
+					"</head>\n" +
+					"<body>\n" +
+					"  <header>\n" +
+					"    <h1>"+l.getTitre()+"</h1>\n" +
+					"    <ul class=\"inline\" id=\"inventaire\"> inventaire :\n";
+			for(IObjet o : value.getObjets()) {
+				str2 = str2 + "      <li class=\"inline\">"+o.getNom()+"</li>\n";
+			}
+			str2 = str2 + "    </ul>\n" +
+					"  </header>\n" +
+					"\n" +
+					"  <h3>"+value.getNom()+"</h3>\n" +
+					"  <p>"+value.getText()+"</p>\n" +
+					"  <ul class=\"inline\" id=\"recuperer\">voici les objets que vous venez de récupéré :\n";
+			for(IObjet o : value.getObjets()) {
+				str2 = str2 + "      <li class=\"inline\">"+o.getNom()+"</li>\n";
+			}
+			str2 = str2 +"  </ul>\n" +
+			"  <p>Où choisissez vous de vous rendre ?</p>\n" +
+			"  <ul>\n";
+			for(Enchainement e : value.getEnchainementSource()) {
+				str2 = str2 + "      <li> <a href=\"./"+e.getNom()+".html\">"+e.getNom()+"</a> </li>\\n";
+			}
+			str2 = str2 +"  </ul>\n" +
+			"\n" +
+			"</body>\n" +
+			"</html>\n" +
+			"";
+			try {
+			FileOutputStream outputStream2 = new FileOutputStream("./LivreHTML/"+l.getTitre()+"/"+value.getNom()+".html");
+			byte[] strToBytes2 = str2.getBytes();
+			outputStream2.write(strToBytes2);
+			outputStream2.close();
+			}catch(IOException e) {}
+		});
 		return null;
 	}
 }
