@@ -3,6 +3,7 @@
  */
 package itf;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set<ISection> listerSections();
+	public HashMap<String, ISection> listerSections();
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -63,7 +64,7 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set<String> getSections();
+	public HashMap<String,String> getSections();
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -71,7 +72,7 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set<String> getObjets();
+	public HashMap<String,String> getObjets();
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -79,7 +80,7 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set<String> getEnchainements();
+	public HashMap<String,String> getEnchainements();
 
 	/** 
 	* <!-- begin-UML-doc -->
