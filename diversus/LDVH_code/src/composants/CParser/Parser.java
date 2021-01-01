@@ -529,7 +529,7 @@ public class Parser implements IParser {
 				str = str + "    </ul>\n" +
 				"  </header>\n" +
 				"\n" +
-				"  <h3>Section1</h3>\n" +
+				"  <h3>"+l.getTetedesection().getNom()+"</h3>\n" +
 				"  <p>description de la section</p>\n" +
 				"  <ul class=\"inline\" id=\"recuperer\">voici les objets que vous venez de récupéré :\n" +
 				"    <li class=\"inline\">fraise</li>\n" +
@@ -546,7 +546,7 @@ public class Parser implements IParser {
 				"</body>\n" +
 				"</html>\n" +
 				"";
-		outputStream = new FileOutputStream("./LivreHTML/livre.html");
+		outputStream = new FileOutputStream("./LivreHTML/"+l.getTetedesection().getNom()+".html");
 		strToBytes = str.getBytes();
 		outputStream.write(strToBytes);
 
