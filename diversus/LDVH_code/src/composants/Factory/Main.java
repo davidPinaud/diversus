@@ -59,6 +59,7 @@ public class Main {
 		livreDEMOA.createSection("Milieu", "Section B");
 		System.out.println(livreDEMOA.etatLivre());
 		livreDEMOA.createSection("Sortie", "Section C");
+		livreDEMOA.setTetedesection(livreDEMOA.getSection().get("Section A"));
 		livreDEMOA.createObject("épée");
 		livreDEMOA.getSection().get("Section B").addObjet(livreDEMOA.getObjets().get("épée"));
 		List<IObjet> list=new ArrayList<>();
@@ -66,7 +67,12 @@ public class Main {
 		livreDEMOA.createEnchainement("A-->B","Je vais au milieu",(ISection) livreDEMOA.getSection().get("Section A"),(ISection) livreDEMOA.getSection().get("Section B"),list);
 		livreDEMOA.createEnchainement("B-->C","Je vais à la fin",(ISection) livreDEMOA.getSection().get("Section B"),(ISection) livreDEMOA.getSection().get("Section C"), new ArrayList<IObjet>());
 		System.out.println("*****************************\n"+livreDEMOA.etatLivre());
-		//System.out.println("Analyse : ");
+		Analyse analyse=(Analyse) CFactory.createAnalyse(livreDEMOA);
+		List<String> atteignables=analyse.Analyser_graphe();
+		System.out.println("Sections atteignables : \n");
+		for(String s:atteignables) {
+			System.out.print(s+" ");
+		}
 		Parser p = new Parser();
 		p.generateHTML(livreDEMOA);
 	}

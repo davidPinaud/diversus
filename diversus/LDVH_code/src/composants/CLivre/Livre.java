@@ -56,10 +56,15 @@ public class Livre implements ILivre {
 	}
 	@Override
 	public String createSection(String texte, String nom) {
-		if(!SectionExist(nom)) {
-			Section sec=new Section(0,nom,texte ,this,  new ArrayList<IObjet>());
-			section.put(nom, sec);
-			return nom;
+		try {
+			if(!SectionExist(nom)) {
+				Section sec=new Section(0,nom,texte ,this,  new ArrayList<IObjet>());
+				section.put(nom, sec);
+				return nom;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -158,7 +163,10 @@ public class Livre implements ILivre {
 	}
 
 	@Override
-	public Boolean SectionExist(String nom) {
+	public Boolean SectionExist(String nom) throws Exception{
+		if(section.containsKey(nom)) {
+			throw new Exception();
+		}
 		return section.containsKey(nom);
 	}
 

@@ -32,28 +32,45 @@ public class Analyse implements IAnalyse{
 	public List<String> Analyser_graphe() {
 		Section teteSection=((Livre) livre).getSection().get(livre.getTete());
 		
-		List<Section> TouteSections=new ArrayList<>();
+		List<String> TouteSections=new ArrayList<>();
 		for (Entry<String, Section> entry : ((Livre) livre).getSection().entrySet()) {
 			TouteSections.add(entry.getValue().getNom());
 		}
 		TouteSections.remove(teteSection.getNom());
 		
+		/*
 		List<String> atteignable=new ArrayList<>();
+		atteignable =teteSection.getNextAtteignable();
 		atteignable.add(teteSection.getNom());
 		
-		int nb=50000;
-		List<String> teteAtteignable =teteSection.getNextAtteignable();
-		for(String s:teteSection.getNextAtteignable()) {
-			if
-		}
-		while(nb>0 && !TouteSections.isEmpty()) {
+
+		for(int i=0;i<1000;i++) {
 			
+		}*/
+		
+		int nb=1000;
+		
+		List<String> atteignable=new ArrayList<>();
+		List<String> file=new ArrayList<>();
+		atteignable.add(teteSection.getNom());
+		file.add(teteSection.getNom());
+		while(!file.isEmpty()) {
+			String section=file.get(0);
+			file.remove(0);
+			TouteSections.remove(section);
+			
+			if(TouteSections.isEmpty()||nb<0) {
+				break;
+			}
 			nb--;
+			
+			for(String nom:((Livre) livre).getSection().get(section).getNextAtteignable()) {
+				if(!atteignable.contains(nom)) {
+					atteignable.add(nom);
+					file.add(nom);
+				}
+			}
 		}
-		
-		
-		
-		
 		
 		return atteignable;
 	}
