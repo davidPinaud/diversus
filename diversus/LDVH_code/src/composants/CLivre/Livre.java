@@ -3,8 +3,11 @@
  */
 package composants.CLivre;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 /** 
@@ -23,18 +26,23 @@ import itf.*;
  */
 public class Livre implements ILivre {
 	
-	
 	private HashMap<String,Section> section;
+	
+	//private HashMap<String,Section> section2;
+	
 	private String titre;
 	private String auteur;
-	private HashMap<String,Enchainement> enchainement;
+	
 	private Integer id;
+	
 	private Section tetedesection;
+	
 	private HashMap<String,Objets> objets;
-	private HashMap<String,Objets> objets2;
-	private Section tetesection;
-	private HashMap<String,Section> section2;
-	private HashMap<String,Enchainement> enchainement2;
+	//private HashMap<String,Objets> objets2;
+	
+	
+	private HashMap<String,Enchainement> enchainement;
+	//private HashMap<String,Enchainement> enchainement2;
 
 	
 	@Override
@@ -44,82 +52,103 @@ public class Livre implements ILivre {
 
 	@Override
 	public HashMap<String,ISection> listerSections() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String createSection(String test, Boolean isAtteignable, String nom) {
-		// TODO Auto-generated method stub
-		return null;
+	public String createSection(String texte, Boolean isAtteignable, String nom) {
+		Section sec=new Section(0,nom,texte ,this,  new ArrayList<IObjet>());
+		section.put(nom, sec);
+		return nom;
 	}
 
 	@Override
 	public void createObject(String nom) {
-		// TODO Auto-generated method stub
-		
+		objets.put(nom,new Objets(nom));
 	}
 
 
 	@Override
-	public HashMap<String,String> getSections() {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<String> getSections() {
+		return section.keySet();
 	}
 
 	@Override
-	public HashMap<String,String> getObjets() {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<String> getObjets() {
+		return objets.keySet();
 	}
 
 	@Override
-	public HashMap<String,String> getEnchainements() {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<String> getEnchainements() {
+		return enchainement.keySet();
 	}
 
 	@Override
 	public void ChargerOngletEchainement() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public void AddEnchainement(String nom, String description, ISection src, ISection dst, String... objets) {
-		// TODO Auto-generated method stub
-
+	public void AddEnchainement(String nom, String description, ISection src, ISection dst, List<String> objetsList) {
+		ArrayList<IObjet> listObjets=new ArrayList<>();
+		for(String obString:objetsList) {
+			listObjets.add(objets.get(obString));
+		}
+		Enchainement e=new Enchainement(nom, description, src, dst, listObjets);
+		enchainement.put(e.getNom(), e);
 	}
-
+	
+	@Override
+	public void createEnchainement(String texte, String nom, ISection src, ISection dst, List<IObjet> objets) {
+		Enchainement e=new Enchainement(nom, texte, src, dst, objets);
+		enchainement.put(e.getNom(), e);
+		
+	}
+	
 	@Override
 	public boolean EnchainementExists(ISection src, ISection dst) {
-		// TODO Auto-generated method stub
+		for (Entry<String, Enchainement> entry : enchainement.entrySet()) {
+            Enchainement e=entry.getValue();
+            if(e.getSource().equals(src.getNom())) {
+            	if(e.getDestination().equals(dst.getNom())) {
+            		return true;
+            	}
+            }
+        }
 		return false;
 	}
 
 	@Override
-	public void selectEnchainement(int id) {
-		// TODO Auto-generated method stub
-
-	}
+	public void selectEnchainement(int id) {}
 
 	@Override
 	public void modifEnchainement(String id, String nom, String description, ISection src, ISection dst,
-			String... objets) {
-		// TODO Auto-generated method stub
-
+			List<String> objetsList) {
+		Enchainement e=enchainement.get(nom);
+		e.SetDescription(description);
+		e.setDest(dst);
+		e.setSrc(src);
+		ArrayList<IObjet> listObjets=new ArrayList<>();
+		for(String obString:objetsList) {
+			listObjets.add(objets.get(obString));
+		}
+		e.setObjets(listObjets);
 	}
 
 	@Override
 	public void deleteEnchainement(int id) {
-		// TODO Auto-generated method stub
-
+		for (Entry<String, Enchainement> entry : enchainement.entrySet()) {
+            Enchainement e=entry.getValue();
+            if(e.getId()==id) {
+            	enchainement.remove(entry.getKey());
+            	break;
+            }
+		}
 	}
 
 	@Override
 	public Boolean checkEnchainementExists(String nom) {
-		// TODO Auto-generated method stub
-		return null;
+		return enchainement.containsKey(nom);
 	}
 
 	
@@ -131,14 +160,12 @@ public class Livre implements ILivre {
 
 	@Override
 	public Boolean SectionExist(Class nom) {
-		// TODO Auto-generated method stub
-		return null;
+		return section.containsKey(nom);
 	}
 
 	@Override
 	public String getTete() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.tetedesection.getNom();
 	}
 	@Override
 	public String toString() {
@@ -168,17 +195,17 @@ public class Livre implements ILivre {
 		
 	}
 
-	@Override
-	public void createEnchainement(String texte, String nom, ISection src, ISection dst, List<IObjet> objets) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public boolean deleteSection(String nom) {
-		// TODO Auto-generated method stub
+		if(section.containsKey(nom)) {
+			section.remove(nom);
+				return true;
+		}
 		return false;
 	}
+	
+	
 	public HashMap<String, Section> getSection() {
 		return section;
 	}
@@ -227,37 +254,6 @@ public class Livre implements ILivre {
 		this.tetedesection = tetedesection;
 	}
 
-	public HashMap<String, Objets> getObjets2() {
-		return objets2;
-	}
-
-	public void setObjets2(HashMap<String, Objets> objets2) {
-		this.objets2 = objets2;
-	}
-
-	public Section getTetesection() {
-		return tetesection;
-	}
-
-	public void setTetesection(Section tetesection) {
-		this.tetesection = tetesection;
-	}
-
-	public HashMap<String, Section> getSection2() {
-		return section2;
-	}
-
-	public void setSection2(HashMap<String, Section> section2) {
-		this.section2 = section2;
-	}
-
-	public HashMap<String, Enchainement> getEnchainement2() {
-		return enchainement2;
-	}
-
-	public void setEnchainement2(HashMap<String, Enchainement> enchainement2) {
-		this.enchainement2 = enchainement2;
-	}
 
 	public void setObjets(HashMap<String, Objets> objets) {
 		this.objets = objets;

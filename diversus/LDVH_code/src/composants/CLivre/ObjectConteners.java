@@ -32,13 +32,15 @@ public class ObjectConteners {
 	public String getNom() {
 		return nom;
 	}
-	public List<IObjet> getObjets() {
+	public List<IObjet> getObjetsDeContener() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return objets;
 		// end-user-code
 	}
-
+	public void setObjets(List<IObjet> objets) {
+		this.objets=objets;
+	}
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->

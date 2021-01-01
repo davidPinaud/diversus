@@ -64,7 +64,7 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public HashMap<String,String> getSections();
+	public Set<String> getSections();
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -72,7 +72,7 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public HashMap<String,String> getObjets();
+	public Set<String> getObjets();
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -80,7 +80,7 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public HashMap<String,String> getEnchainements();
+	public Set<String> getEnchainements();
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -99,7 +99,7 @@ public interface ILivre {
 	* @param objets
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void AddEnchainement(String nom, String description, ISection src, ISection dst, String... objets);
+	public void AddEnchainement(String nom, String description, ISection src, ISection dst, List<String> objets);
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -131,7 +131,7 @@ public interface ILivre {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void modifEnchainement(String id, String nom, String description, ISection src, ISection dst,
-			String... objets);
+			List<String> objetsList);
 
 	/** 
 	* <!-- begin-UML-doc -->

@@ -134,6 +134,21 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	public void setDest(ISection dst) {
 		this.section2 = dst;
 	}
+	
+	public int getId() {
+		return id;
+		}
+
+	@Override
+	public List<IObjet> getObjets() {
+		return this.getObjetsDeContener();
+	}
+
+	@Override
+	public void AddObjet(String Objet) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	/** 
 	* (non-Javadoc)
@@ -145,5 +160,5 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 		// TODO Auto-generated method stub
 
 		// end-user-code
-	}
+	//}
 }
