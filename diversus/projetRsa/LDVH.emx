@@ -2466,7 +2466,7 @@
             <children xmi:type="notation:SemanticListCompartment" xmi:id="_egg71i6qEeu45NjBeVsWmg" type="AttributeCompartment"/>
             <children xmi:type="notation:SemanticListCompartment" xmi:id="_egg71y6qEeu45NjBeVsWmg" type="OperationCompartment"/>
             <children xmi:type="notation:SemanticListCompartment" xmi:id="_egg72C6qEeu45NjBeVsWmg" visible="false" type="SignalCompartment"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_egg72S6qEeu45NjBeVsWmg" x="9193" width="7482" height="10428"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_egg72S6qEeu45NjBeVsWmg" x="7608" y="-2536" width="9068" height="12968"/>
           </children>
           <children xmi:type="umlnotation:UMLClassifierShape" xmi:id="_egg72i6qEeu45NjBeVsWmg" element="_54IN8C6fEeu45NjBeVsWmg" fontName="Segoe UI" fontHeight="8" showListSignature="true" transparency="0" lineColor="14263149" lineWidth="1" showStereotype="Label" useClassifierShape="true">
             <children xmi:type="notation:DecorationNode" xmi:id="_egg72y6qEeu45NjBeVsWmg" type="ImageCompartment">
@@ -4946,21 +4946,24 @@
       </packagedElement>
       <packagedElement xmi:type="uml:Interface" xmi:id="_16_C8C6fEeu45NjBeVsWmg" name="IAnalyse">
         <ownedOperation xmi:id="_TeAqYC_9Eeuh-vvNr8PiLQ" name="Analyser_graphe">
-          <ownedParameter xmi:id="_Z6cdYECHEeudAot5MTUGoQ" name="Parameter1" direction="return">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          <ownedParameter xmi:id="_jBGn4ExkEeu08czikaP7WQ" name="objets" type="_ws-F8C6fEeu45NjBeVsWmg">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jBIdEUxkEeu08czikaP7WQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jBIdEExkEeu08czikaP7WQ"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_jBJrMExkEeu08czikaP7WQ" name="compteARebours" type="_qw0Y8D03EeuRYOT4UpgUqA"/>
+          <ownedParameter xmi:id="_Z6cdYECHEeudAot5MTUGoQ" name="Parameter1" type="_KWvGQEeKEeuROrqyRANNnw" direction="return">
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Z6dEcECHEeudAot5MTUGoQ" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Z6cdYUCHEeudAot5MTUGoQ"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation xmi:id="_fOT90C87EeuxKbhZfFwmcQ" name="updateAtteignabilite">
-          <ownedParameter xmi:id="_j9PyIC87EeuxKbhZfFwmcQ" name="nomSection">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <ownedOperation xmi:id="_DY1ZoExkEeu08czikaP7WQ" name="analyser_graphe">
+          <ownedParameter xmi:id="_Ss-5IExkEeu08czikaP7WQ" name="objets" type="_ws-F8C6fEeu45NjBeVsWmg">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_StAHQUxkEeu08czikaP7WQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_StAHQExkEeu08czikaP7WQ"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_j9PyIS87EeuxKbhZfFwmcQ" name="nomEnchainement">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </ownedParameter>
-          <ownedParameter xmi:id="_j9PyIi87EeuxKbhZfFwmcQ" name="nomObjet">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          <ownedParameter xmi:id="_StBVYExkEeu08czikaP7WQ" name="Parameter1" type="_KWvGQEeKEeuROrqyRANNnw" direction="return">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_StB8cUxkEeu08czikaP7WQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_StB8cExkEeu08czikaP7WQ"/>
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
