@@ -7,6 +7,9 @@ import itf.*;
 
 public class GestLivres implements IGestLivre {
 	private Map<String, ILivre> livres=new HashMap<String, ILivre>();
+	public GestLivres() {
+		
+	}
 	@Override
 	public void addLivre(String nom, String auteur) {
 		// TODO Auto-generated method stub

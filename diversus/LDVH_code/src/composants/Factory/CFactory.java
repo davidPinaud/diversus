@@ -115,4 +115,9 @@ public class CFactory {
 		return null;
 		// end-user-code
 	}
+	public static IGestLivre createGestLivre() {
+		
+		return new GestLivres();
+		
+	}
 }
