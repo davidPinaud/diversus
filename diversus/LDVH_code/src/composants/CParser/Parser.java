@@ -48,9 +48,9 @@ public class Parser implements IParser {
 		File[] files = file.listFiles();
 		for (File f : files) {
 		   f.delete();
-		} 
+		}
 
-		
+
 		//creation du fichier css
 		file = new File("./LivreHTML/style.css");
 		String str = "/* MVP.css v1.6.3 - https://github.com/andybrewer/mvp */\n" +
@@ -519,13 +519,13 @@ public class Parser implements IParser {
 				"  padding: 0;\n" +
 				"}\n" +
 				"";
-		
+
 		FileOutputStream outputStream = new FileOutputStream("./LivreHTML/style.css");
 		byte[] strToBytes = str.getBytes();
 		outputStream.write(strToBytes);
 		outputStream.close();
 
-		
+
 		//creation de toutes les setions .html
 		HashMap<String, Section> sections = l.getSection();
 		for (Entry<String, Section> entry : sections.entrySet()) {
@@ -540,6 +540,13 @@ public class Parser implements IParser {
 					"  <script src=\"script.js\"></script>\n" +
 					"</head>\n" +
 					"<body>\n" +
+					  "<script src=\"https://code.jquery.com/jquery-3.3.1.js\"></script>"+
+					"<script>"+
+					  "function redirectTo(elem) {"+
+					    "event.preventDefault();"+
+					    "top.location.href = elem.firstElementChild.options[elem.firstElementChild.selectedIndex].value"+
+					  "}"+
+					"</script>" +
 					"  <header>\n" +
 					"    <h1>"+l.getTitre()+"</h1>\n" +
 					"    <ul class=\"inline\" id=\"inventaire\"> inventaire :\n";
@@ -559,14 +566,23 @@ public class Parser implements IParser {
 			"  <p>Où choisissez vous de vous rendre ?</p>\n" +
 			"  <ul>\n";
 			for(Enchainement e : value.getEnchainementSource()) {
-				str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> : "+e.getTexte()+"<br>( objets requis : ";
+				//str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> : "+e.getTexte()+"<br>( objets requis : ";
+				str2 = str2 + "      <li>"+e.getNom()+" : "+e.getTexte()+"<br>( objets requis : ";
 				for(IObjet o : e.getObjets()) {
 					str2 = str2 + o.getNom() + " ";
 				}
 				str2 = str2 + ")</li>";
-				
 			}
 			str2 = str2 +"  </ul>" +
+
+			"<form name=\"urlselect\" onsubmit=\"return redirectTo(this)\">"+
+			  "<select name=\"menu\" value=\"GO\">";
+			for(Enchainement e : value.getEnchainementSource()) {
+				str2 = str2 +"<option value=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</option>";
+			}
+			  str2 = str2 + "</select>"+
+			"<input type=\"submit\"></form>"+
+
 			"</body>\n" +
 			"</html>\n" +
 			"";
