@@ -6,6 +6,8 @@ package composants.CLivre;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.PrimitiveIterator.OfDouble;
+
 import itf.IObjet;
 
 /** 
@@ -14,7 +16,14 @@ import itf.IObjet;
 public class ObjectConteners {
 	String nom;
 	private List<IObjet> objets=new ArrayList<IObjet>();
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof ObjectConteners) {
+			return ((ObjectConteners) obj).getNom().equals(this.nom)&&((ObjectConteners) obj).getObjets().equals(this.objets);
+		}
+		return false;
+	}
 
 	public ObjectConteners(String nom) {
 		this.nom=nom;

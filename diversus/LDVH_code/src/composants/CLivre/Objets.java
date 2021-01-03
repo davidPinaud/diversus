@@ -23,6 +23,15 @@ public class Objets implements IObjet {
 	/**
 	 * Liste initialement vide, contient des références vers les sections et les enchainements qui référencent l'objet courant
 	 */
+	
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if(obj instanceof Objets) {
+			return ((Objets) obj).getNom().equals(this.nom_objet);
+		}
+		return false;
+	}
 	private List< ObjectConteners> contaners=new ArrayList< ObjectConteners> ();
 	public Objets(String nom) {
 		nom_objet=nom;

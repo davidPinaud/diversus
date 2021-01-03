@@ -54,7 +54,16 @@ public class Enchainement extends ObjectConteners implements IEnchainement {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private int id;
-
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Enchainement) {
+			return this.getSource().equals(((Enchainement) obj).getSource())
+					&&this.getDestination().equals(((Enchainement) obj).getDestination())
+					&&this.getTexte().equals(((Enchainement) obj).getTexte())
+					&&this.getNom().equals(((Enchainement) obj).getNom());
+		}
+		return false;
+	}
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->

@@ -57,5 +57,13 @@ public class GestLivres implements IGestLivre {
 	     }
 	     return true;
 	 }
+	 
+	 @Override
+	public boolean equals(Object obj) {
+		if(obj instanceof GestLivres) {
+			return this.getLivres().equals(((GestLivres) obj).getLivres());
+		}
+		return false;
+	}
 
 }

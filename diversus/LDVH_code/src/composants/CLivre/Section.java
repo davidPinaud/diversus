@@ -79,7 +79,19 @@ public class Section extends ObjectConteners implements ISection {
 	*/
 	//private Set<Enchainement> enchainement3;
 
-	
+	@Override
+	public boolean equals(Object section) {
+		if(section instanceof Section) {
+			Section s=((Section) section);
+			return s.getNom().equals(this.nom)&&s.getText().equals(this.texte)&&
+					s.getObjets().equals(this.objets)&&s.getTete()==this.isTete&&
+					this.getEnchainementDestination().equals(s.getEnchainementDestination())&&
+					this.getEnchainementSource().equals(s.getEnchainementSource());
+		}
+		else {
+			return false;
+		}
+	}
 	public Section( Integer id, String nom, String texte ,Livre livre,  List<IObjet> objets) {
 		super(objets);
 		super.nom=nom;
@@ -154,6 +166,8 @@ public class Section extends ObjectConteners implements ISection {
 	public void setNom(String nom) {
 	    super.setNom(nom);
 	}
+	
+	
 
 	/** 
 	* (non-Javadoc)

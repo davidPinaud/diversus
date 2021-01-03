@@ -45,7 +45,20 @@ public class Livre implements ILivre {
 	
 	private HashMap<String,Enchainement> enchainement;
 	//private HashMap<String,Enchainement> enchainement2;
-
+	
+	@Override
+	public boolean equals(Object livre) {
+		if(livre instanceof Livre) {
+			Livre l=((Livre) livre);
+			return l.getSection().equals(this.section)&&l.getTitre().equals(this.titre)
+					&&l.getEnchainement().equals(this.enchainement)
+					&&l.getAuteur().equals(this.auteur)
+					&&l.getObjets().equals(this.objets);
+		}else {
+			return false;
+		}
+		
+	}
 	
 	public Livre(String titre,String auteur) {
 		this.titre=titre;
