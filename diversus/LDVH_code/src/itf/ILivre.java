@@ -34,6 +34,12 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
+	
+	public void setTete(ISection sec) ;
+	public IObjet getObjet(String nom);
+	public ISection getSection(String nom);
+	public IEnchainement getEnchainement(String nom);
+	
 	public String createSection(String test, String nom);
 
 	/** 

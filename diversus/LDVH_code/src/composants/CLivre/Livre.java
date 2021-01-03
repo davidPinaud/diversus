@@ -58,7 +58,7 @@ public class Livre implements ILivre {
 	public String createSection(String texte, String nom) {
 		try {
 			if(!SectionExist(nom)) {
-				Section sec=new Section(0,nom,texte ,this,  new ArrayList<IObjet>());
+				Section sec=new Section(nom,texte ,this,  new ArrayList<IObjet>());
 				section.put(nom, sec);
 				return nom;
 			}
@@ -68,7 +68,18 @@ public class Livre implements ILivre {
 		}
 		return null;
 	}
-
+	@Override
+	public IObjet getObjet(String nom) {
+		return objets.get(nom);
+	}
+	@Override
+	public ISection getSection(String nom) {
+		return section.get(nom);
+	}
+	@Override
+	public IEnchainement getEnchainement(String nom) {
+		return enchainement.get(nom);
+	}
 	@Override
 	public void createObject(String nom) {
 		objets.put(nom,new Objets(nom));
@@ -235,12 +246,17 @@ public class Livre implements ILivre {
 		return false;
 	}
 	
-	
+	@Override
+	public void setTete(ISection sec) {
+		Section s=(Section )sec;
+		tetedesection=s;
+	}
 	public HashMap<String, Section> getSection() {
 		return section;
 	}
 
 	public void setSection(HashMap<String, Section> section) {
+		
 		this.section = section;
 	}
 
@@ -288,6 +304,6 @@ public class Livre implements ILivre {
 	public void setObjets(HashMap<String, Objets> objets) {
 		this.objets = objets;
 	}
-
+	
 	
 }

@@ -22,14 +22,14 @@ public class EnchainementTest {
 	List<ILivre> listeLivres;
 	@Before
 	
-	public void setUp() {
+	public void setUp()  {
 		gest=CFactory.createGestLivre();
 		
 		
 		 
 	}
 	@Test
-	public void creerLivres() {
+	public void creerLivres() throws Exception{
 		gest.addLivre("Dream" , "felina");
 		livre =gest.getLivre("Dream");
 		// tester que le livre a été créé
@@ -44,17 +44,23 @@ public class EnchainementTest {
 		
 		assertEquals(livre, gest.getLivre("Dream"));
 		assertEquals(livre2, gest.getLivre("Corbeau"));
-		
+		//System.out.println(gest.getLivres());
 	}
 	
-	
+	public void createBook() throws Exception {
+		gest.addLivre("Dream" , "felina");
+		gest.addLivre("Corbeau" , "Lafontaine");
+	}
 
 	
-	/*@Test(expected=Exception.class)
+	@Test(expected=Exception.class)
 	// livre déjà présent
-	public void creerLivreExistant() {
+	public void creerLivreExistant() throws Exception{
+		createBook();
+		//System.out.println(gest.getLivres());
 		gest.addLivre("Dream", "Inas");
-	}*/
+		System.out.println(gest.getLivres());
+	}
 	/*@Test
 	public void modifierLivre() {
 		ILivre livre3 =gest.getLivre("Dream");
@@ -62,16 +68,24 @@ public class EnchainementTest {
 		
 	}*/
 	
-
+	
 	@Test
-	public void supprimerLivre() {
+	public void supprimerLivre() throws Exception {
+		//System.out.println(gest.getLivres());
+		createBook();
 		gest.deleteLivre("Corbeau");
 		assertFalse(gest.contains("Corbeau"));
 	}
 	
+	@Test( expected=Exception.class)
+	public void supprimerLivreNonExistent() throws Exception{
+		gest.deleteLivre("Corbeau");
+	}
+	
+	
 	@Test
 	// long test
-	public void AddDeleteLivre() {
+	public void AddDeleteLivre() throws Exception{
 		gest.addLivre("A" , "felina");
 		gest.addLivre("B" , "felina");
 		gest.addLivre("C" , "felina");
@@ -97,6 +111,51 @@ public class EnchainementTest {
 		
 		
 		
+	}
+	
+	// fonction qui initialise notre jeu de données pour le test d'intégration
+	public void initData(IGestLivre gest) throws Exception {
+		gest.addLivre("Aventure", "Diversus");
+		ILivre liv=gest.getLivre("Aventure");
+		liv.createSection("Bienvenue à l'aventure", "Village");
+		liv.createSection("Ou est donc la potion magique", "Donjon");
+		liv.createSection("L'occasion de vendre mes trouvailles", "Boutique");
+		
+		liv.setTete(liv.getSection("Village"));
+		
+		liv.createObject("Épée");
+		liv.createObject("Bouclier");
+		
+		
+	}
+	
+	// test d'intégration creerEnchainement
+	@Test
+	public void IntegTestCreerEnchainement() {
+		IGestLivre gestTest=CFactory.createGestLivre();
+		try {
+			initData(gestTest);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// suite des fonctions du diagramme de séquences inter-composant 
+		ILivre book=gestTest.getLivre("Aventure");
+		// ---------------- il faut rajouter des equals dans les classes 
+		assertEquals(, book);
+		assertEquals(, book.getObjets());
+		assertEquals(, book.getSections());
+		assertEquals(, book.getEnchainements());
+		
+		assertFalse(book.checkEnchainementExists("Tunnel"));
+		List<String> list=new ArrayList<>();
+		list.add("Bouclier");
+		
+		book.AddEnchainement("Tunnel", "Il fait noir ici", book.getSection("Village"), book.getSection("Donjon"), list);
+		
+		assertTrue(book.EnchainementExists(book.getSection("Village"), book.getSection("Donjon")));
+		IAffichageGraphique af=CFactory.createAffichageGraphique();
+		af.generate();
 	}
 	/*
     @Test
@@ -154,6 +213,7 @@ public class EnchainementTest {
 
     }
 	
+	// fonction qui initialise notre jeu de données pour le test d'intégration
 
 	@Test
 	public void testCreerEnchainement() {

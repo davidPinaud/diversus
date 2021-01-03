@@ -14,8 +14,11 @@ public class GestLivres implements IGestLivre {
 		
 	}
 	@Override
-	public void addLivre(String nom, String auteur) {
+	public void addLivre(String nom, String auteur) throws Exception {
 		// TODO Auto-generated method stub
+		if (contains(nom)) {
+			throw new Exception("Livre avec ce titre déjà existant ");
+		}
 		ILivre livre=new Livre(nom, auteur);
 		livres.put(nom,livre);
 		//System.out.println(livre.toString()+ " a été crée");
@@ -29,27 +32,30 @@ public class GestLivres implements IGestLivre {
 	}
 
 	@Override
-	public void deleteLivre(String titre) {
+	public void deleteLivre(String titre) throws Exception{
 		// TODO Auto-generated method stub
-		livres.remove(titre);
+		if(livres.remove(titre)==null) {
+			throw new Exception("Le livre que vous essayez de supprimer n'existe pas:: ");
+		}
 		//System.out.println("Le livre "+titre+ " a été supprimé");
 	}
 
-	   @Override 
-	    public List<ILivre> getLivres() {
-	        List<ILivre> res=new ArrayList<ILivre>();
-	        for (Entry<String, ILivre> entry: livres.entrySet()) {
-	            res.add(entry.getValue());
-	        }
+	 @Override 
+	 public List<ILivre> getLivres() {
+		 List<ILivre> res=new ArrayList<ILivre>();
+	     for (Entry<String, ILivre> entry: livres.entrySet()) {
+	         res.add(entry.getValue());
+	     }
 
 	        //livres.entrySet()
-	        return res;
-	    }
-	    @Override
-	    public boolean contains(String titre) {
-	        if(livres.get(titre)==null) {
-	            return false;
-	        }
-	        return true;
-	    }
+	     return res;
+	 }
+	 @Override
+	 public boolean contains(String titre) {
+	     if(livres.get(titre)==null) {
+	         return false;
+	     }
+	     return true;
+	 }
+
 }

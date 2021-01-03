@@ -13,7 +13,7 @@ import itf.IAffichageGraphique;
  * @author inas
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class AffichageGraphique {
+public class AffichageGraphique implements IAffichageGraphique{
 
 	@Override
 	public void generate() {

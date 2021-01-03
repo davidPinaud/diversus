@@ -46,6 +46,8 @@ public class Section extends ObjectConteners implements ISection {
 	*/
 	private boolean isTete;
 	private Integer idSection;
+	
+	private static int  cpt=0;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -91,6 +93,25 @@ public class Section extends ObjectConteners implements ISection {
 	public Section( Integer id, String nom, String texte ,List<Enchainement> enchainements,Livre livre) {
 		super(nom);
 		this.idSection=id;
+		this.texte = texte;
+		this.livre = livre;
+		this.enchainement=enchainements;
+		
+	}
+	
+	public Section(  String nom, String texte ,Livre livre,  List<IObjet> objets) {
+		super(objets);
+		super.nom=nom;
+		this.idSection=cpt++;
+		this.texte = texte;
+		this.livre = livre;
+		
+	}
+	
+	
+	public Section( String nom, String texte ,List<Enchainement> enchainements,Livre livre) {
+		super(nom);
+		this.idSection=cpt++;
 		this.texte = texte;
 		this.livre = livre;
 		this.enchainement=enchainements;
