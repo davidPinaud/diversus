@@ -240,11 +240,18 @@ public class Livre implements ILivre {
 	@Override
 	public boolean deleteSection(String nom) {
 		if(section.containsKey(nom)) {
+			for (Entry<String, Enchainement> entry : this.enchainement.entrySet()) {
+	            Enchainement e=entry.getValue();
+	            if(e.getSource().equals(nom)||e.getDestination().equals(nom)) {
+	            	this.enchainement.remove(entry.getKey());
+	            }
+			}
 			section.remove(nom);
 				return true;
 		}
 		return false;
 	}
+
 	
 	@Override
 	public void setTete(ISection sec) {
