@@ -1,6 +1,9 @@
 package composants.CLivre;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import itf.*;
 
@@ -32,4 +35,21 @@ public class GestLivres implements IGestLivre {
 		//System.out.println("Le livre "+titre+ " a été supprimé");
 	}
 
+	   @Override 
+	    public List<ILivre> getLivres() {
+	        List<ILivre> res=new ArrayList<ILivre>();
+	        for (Entry<String, ILivre> entry: livres.entrySet()) {
+	            res.add(entry.getValue());
+	        }
+
+	        //livres.entrySet()
+	        return res;
+	    }
+	    @Override
+	    public boolean contains(String titre) {
+	        if(livres.get(titre)==null) {
+	            return false;
+	        }
+	        return true;
+	    }
 }
