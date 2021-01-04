@@ -47,17 +47,17 @@ public class Parser implements IParser {
 		//creation du dossier
 		File file = new File("./LivrePDF");
 		if (!file.exists()) file.mkdir();
-		
+
 		//creation du PDF
 		Document document = new Document();
 		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("./LivrePDF/"+l.getTitre()+".pdf"));
 		document.open();
-		
+
 		//creation de differente police de caractere
 		Font f10 = new Font(FontFamily.TIMES_ROMAN, 10);
 		Font f14 = new Font(FontFamily.TIMES_ROMAN, 14);
 		Font f24 = new Font(FontFamily.TIMES_ROMAN, 24);
-		
+
 		//creation de la premier page
 		Paragraph p = new Paragraph("page 1", f10);
 		p.setAlignment(2);
@@ -72,7 +72,7 @@ public class Parser implements IParser {
 		HashMap<Section, Integer> pages = new HashMap();
 		int i = 2;
 		pages.put(l.getTetedesection(), i++);
-		
+
 		//map assignant une section a un numero de page
 		for (Entry<String, Section> entry : sections.entrySet()) {
 			Section value = (Section) entry.getValue();
@@ -109,7 +109,7 @@ public class Parser implements IParser {
 			document.add(new Paragraph(str, f14));
 			document.add(new Paragraph(" ", f14));
 		}
-		
+
 		//On fait ensuite toute les autres sections
 		for (Entry<String, Section> entry : sections.entrySet()) {
 			Section value = (Section) entry.getValue();
@@ -702,6 +702,31 @@ public class Parser implements IParser {
 			"";
 			FileOutputStream outputStream2 = new FileOutputStream("./LivreHTML/"+l.getTitre()+"/"+value.getNom()+".html");
 			byte[] strToBytes2 = str2.getBytes();
+			outputStream2.write(strToBytes2);
+			outputStream2.close();
+
+			//creation de la page de garde
+			file2 = new File("./LivreHTML/"+l.getTitre()+".html");
+			str2 = "<!doctype html>\n" +
+					"<html lang=\"fr\">\n" +
+					"<head>\n" +
+					"  <meta charset=\"utf-8\">\n" +
+					"  <title>DVStory by Diversus</title>\n" +
+					"  <link rel=\"stylesheet\" href=\"./style.css\">\n" +
+					"  <script src=\"script.js\"></script>\n" +
+					"</head>\n" +
+					"<body>\n" +
+					"<script src=\"https://code.jquery.com/jquery-3.3.1.js\"></script>"+
+					"  <header>\n" +
+					"<h1>"+l.getTitre()+"</h1>"+
+					"<h3>by "+l.getAuteur()+"</h3>"+
+					"<a href=\"./"+l.getTitre()+"/"+l.getTetedesection().getNom()+".html\">Commencer</a>"+
+					"  </header>\n" +
+					"</body>\n" +
+					"</html>\n" +
+					"";
+			outputStream2 = new FileOutputStream("./LivreHTML/"+l.getTitre()+".html");
+			strToBytes2 = str2.getBytes();
 			outputStream2.write(strToBytes2);
 			outputStream2.close();
 		}
