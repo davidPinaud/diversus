@@ -47,6 +47,10 @@ public class Livre implements ILivre {
 	//private HashMap<String,Enchainement> enchainement2;
 	
 	@Override
+	public String getTitre() {
+		return titre;
+	}
+	@Override
 	public boolean equals(Object livre) {
 		if(livre instanceof Livre) {
 			Livre l=((Livre) livre);
@@ -280,9 +284,7 @@ public class Livre implements ILivre {
 		this.section = section;
 	}
 
-	public String getTitre() {
-		return titre;
-	}
+
 
 	public void setTitre(String titre) {
 		this.titre = titre;
