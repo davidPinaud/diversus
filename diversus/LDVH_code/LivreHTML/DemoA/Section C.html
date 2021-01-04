@@ -7,7 +7,7 @@
   <script src="script.js"></script>
 </head>
 <body>
-  <header>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script><script>function redirectTo(elem) {event.preventDefault();top.location.href = elem.firstElementChild.options[elem.firstElementChild.selectedIndex].value}</script>  <header>
     <h1>DemoA</h1>
     <ul class="inline" id="inventaire"> inventaire :
     </ul>
@@ -19,5 +19,5 @@
   </ul>
   <p>Où choisissez vous de vous rendre ?</p>
   <ul>
-  </ul></body>
+  </ul><form name="urlselect" onsubmit="return redirectTo(this)"><select name="menu" value="GO"></select><input type="submit"></form></body>
 </html>

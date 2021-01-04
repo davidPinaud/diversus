@@ -15,9 +15,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import composants.CLivre.Enchainement;
 import composants.CLivre.Livre;
@@ -33,21 +36,94 @@ import itf.*;
 public class Parser implements IParser {
 
 	@Override
-	public String generateImprimable(Livre l) throws IOException{
-		// TODO Auto-generated method stub
+	public String generateImprimable(Livre l) throws DocumentException, IOException{
+
+		//creation du dossier
+		File file = new File("./LivrePDF");
+		if (!file.exists()) file.mkdir();
+		Document document = new Document();
+		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("./LivrePDF/"+l.getTitre()+".pdf"));
+		document.open();
+		document.add(new Paragraph("page 1"));
+		document.add(new Paragraph(l.getTitre()));
+		document.add(new Paragraph("by "+l.getAuteur()));
+		//document.add(new Paragraph());
+		HashMap<String, Section> sections = l.getSection();
+		HashMap<Section, Integer> pages = new HashMap();
+		int i = 2;
+		pages.put(l.getTetedesection(), i++);
+
+		for (Entry<String, Section> entry : sections.entrySet()) {
+			Section value = (Section) entry.getValue();
+			if(value!=l.getTetedesection())pages.put(value, i++);
+		}
+		//On commence par la tete de section
+		document.newPage();
+		document.add(new Paragraph("page "+pages.get(l.getTetedesection())));
+		document.add(new Paragraph(l.getTetedesection().getNom()));
+		document.add(new Paragraph(l.getTetedesection().getText()));
+		document.add(new Paragraph(" "));
+		document.add(new Paragraph("Voici les objets que vous venez de récupérer :"));
+		for(IObjet o : l.getTetedesection().getObjets()) {
+			document.add(new Paragraph(o.getNom()+" "));
+		}
+		document.add(new Paragraph(" "));
+		document.add(new Paragraph(" "));
+		document.add(new Paragraph("Où choisissez vous de vous rendre ?"));
+		document.add(new Paragraph(" "));
+		for(Enchainement e : l.getTetedesection().getEnchainementSource()) {
+			document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : "+e.getTexte()));
+			document.add(new Paragraph("Liste des objets requis :"));
+			for(IObjet o : e.getObjets()) {
+				document.add(new Paragraph(o.getNom()));
+			}
+			document.add(new Paragraph(" "));
+		}
+		
+		//On fait ensuite toute les autres sections
+		for (Entry<String, Section> entry : sections.entrySet()) {
+			Section value = (Section) entry.getValue();
+			if(value!=l.getTetedesection()) {
+				document.newPage();
+				document.add(new Paragraph("page "+pages.get(value)));
+				document.add(new Paragraph(value.getNom()));
+				document.add(new Paragraph(value.getText()));
+				document.add(new Paragraph(" "));
+				document.add(new Paragraph("Voici les objets que vous venez de récupérer :"));
+				for(IObjet o : value.getObjets()) {
+					document.add(new Paragraph(o.getNom()+" "));
+				}
+				document.add(new Paragraph(" "));
+				document.add(new Paragraph(" "));
+				document.add(new Paragraph("Où choisissez vous de vous rendre ?"));
+				document.add(new Paragraph(" "));
+				for(Enchainement e : value.getEnchainementSource()) {
+					document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : "+e.getTexte()));
+					document.add(new Paragraph("Liste des objets requis :"));
+					for(IObjet o : e.getObjets()) {
+						document.add(new Paragraph(o.getNom()));
+					}
+					document.add(new Paragraph(" "));
+				}
+			}
+		}
+
+		document.close();
+		writer.close();
+
 		return null;
 	}
 
 	@Override
 	public String generateHTML(Livre l) throws IOException {
-		//creation des dossier
+		//creation des dossiers
 		File file = new File("./LivreHTML");
 		if (!file.exists()) file.mkdir();
 		file = new File("./LivreHTML/"+l.getTitre());
 		if (!file.exists()) file.mkdir();
 		File[] files = file.listFiles();
 		for (File f : files) {
-		   f.delete();
+			f.delete();
 		}
 
 
@@ -540,12 +616,12 @@ public class Parser implements IParser {
 					"  <script src=\"script.js\"></script>\n" +
 					"</head>\n" +
 					"<body>\n" +
-					  "<script src=\"https://code.jquery.com/jquery-3.3.1.js\"></script>"+
+					"<script src=\"https://code.jquery.com/jquery-3.3.1.js\"></script>"+
 					"<script>"+
-					  "function redirectTo(elem) {"+
-					    "event.preventDefault();"+
-					    "top.location.href = elem.firstElementChild.options[elem.firstElementChild.selectedIndex].value"+
-					  "}"+
+					"function redirectTo(elem) {"+
+					"event.preventDefault();"+
+					"top.location.href = elem.firstElementChild.options[elem.firstElementChild.selectedIndex].value"+
+					"}"+
 					"</script>" +
 					"  <header>\n" +
 					"    <h1>"+l.getTitre()+"</h1>\n" +
@@ -563,8 +639,8 @@ public class Parser implements IParser {
 				str2 = str2 + "      <li class=\"inline\">"+o.getNom()+"</li>\n";
 			}
 			str2 = str2 +"  </ul>\n" +
-			"  <p>Où choisissez vous de vous rendre ?</p>\n" +
-			"  <ul>\n";
+					"  <p>Où choisissez vous de vous rendre ?</p>\n" +
+					"  <ul>\n";
 			for(Enchainement e : value.getEnchainementSource()) {
 				//str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> : "+e.getTexte()+"<br>( objets requis : ";
 				str2 = str2 + "      <li>"+e.getNom()+" : "+e.getTexte()+"<br>( objets requis : ";
@@ -576,22 +652,20 @@ public class Parser implements IParser {
 			str2 = str2 +"  </ul>" +
 
 			"<form name=\"urlselect\" onsubmit=\"return redirectTo(this)\">"+
-			  "<select name=\"menu\" value=\"GO\">";
+			"<select name=\"menu\" value=\"GO\">";
 			for(Enchainement e : value.getEnchainementSource()) {
 				str2 = str2 +"<option value=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</option>";
 			}
-			  str2 = str2 + "</select>"+
-			"<input type=\"submit\"></form>"+
+			str2 = str2 + "</select>"+
+					"<input type=\"submit\"></form>"+
 
 			"</body>\n" +
 			"</html>\n" +
 			"";
-			try {
 			FileOutputStream outputStream2 = new FileOutputStream("./LivreHTML/"+l.getTitre()+"/"+value.getNom()+".html");
 			byte[] strToBytes2 = str2.getBytes();
 			outputStream2.write(strToBytes2);
 			outputStream2.close();
-			}catch(IOException e) {}
 		}
 		return null;
 	}

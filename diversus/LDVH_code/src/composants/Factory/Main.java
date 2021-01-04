@@ -3,9 +3,8 @@
  */
 package composants.Factory;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import composants.CAnalyse.Analyse;
@@ -32,7 +31,7 @@ public class Main {
 	IParser parser = CFactory.createParser();
 	GestIHM ihm = CFactory.createIHM();*/
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		demoA();
 	}
 	
@@ -51,9 +50,9 @@ public class Main {
 	 * 	A-->D
 	 * 		Objet "Bouclier"
 	 * 1 Objet
-	 * @throws IOException 
+	 * @throws Exception 
 	 */
-	public static void demoA() throws IOException {
+	public static void demoA() throws Exception {
 		GestLivres gestLivres=(GestLivres) CFactory.createGestLivre();
 		gestLivres.addLivre("DemoA","Test");
 		Livre livreDEMOA=(Livre) gestLivres.getLivre("DemoA");
@@ -83,6 +82,7 @@ public class Main {
 		}
 		Parser p = new Parser();
 		p.generateHTML(livreDEMOA);
+		p.generateImprimable(livreDEMOA);
 	}
 	public void demoB() {
 		System.out.println();
