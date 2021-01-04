@@ -679,8 +679,18 @@ public class Parser implements IParser {
 			str2 = str2 +"  </ul>\n" +
 					"  <p>Où choisissez vous de vous rendre ?</p>\n" +
 					"  <ul>\n";
+			//affichage enchainement avec lien cliquable
 			for(Enchainement e : value.getEnchainementSource()) {
-				//str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> : "+e.getTexte()+"<br>( objets requis : ";
+				str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> : "+e.getTexte()+"<br>( objets requis : ";
+				for(IObjet o : e.getObjets()) {
+					str2 = str2 + o.getNom() + " ";
+				}
+				str2 = str2 + ")</li>";
+			}
+			str2 = str2 +"  </ul>" +
+			//affichage enchainement avec un formulaire
+			/*
+			for(Enchainement e : value.getEnchainementSource()) {
 				str2 = str2 + "      <li>"+e.getNom()+" : "+e.getTexte()+"<br>( objets requis : ";
 				for(IObjet o : e.getObjets()) {
 					str2 = str2 + o.getNom() + " ";
@@ -688,7 +698,6 @@ public class Parser implements IParser {
 				str2 = str2 + ")</li>";
 			}
 			str2 = str2 +"  </ul>" +
-
 			"<form name=\"urlselect\" onsubmit=\"return redirectTo(this)\">"+
 			"<select name=\"menu\" value=\"GO\">";
 			for(Enchainement e : value.getEnchainementSource()) {
@@ -696,7 +705,7 @@ public class Parser implements IParser {
 			}
 			str2 = str2 + "</select>"+
 					"<input type=\"submit\"></form>"+
-
+			*/
 			"</body>\n" +
 			"</html>\n" +
 			"";
