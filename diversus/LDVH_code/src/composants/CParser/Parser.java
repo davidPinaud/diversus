@@ -19,6 +19,9 @@ import java.util.Map.Entry;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -35,49 +38,76 @@ import itf.*;
  */
 public class Parser implements IParser {
 
+	/* (non-Javadoc)
+	 * @see itf.IParser#generateImprimable(composants.CLivre.Livre)
+	 */
 	@Override
 	public String generateImprimable(Livre l) throws DocumentException, IOException{
 
 		//creation du dossier
 		File file = new File("./LivrePDF");
 		if (!file.exists()) file.mkdir();
+		
+		//creation du PDF
 		Document document = new Document();
 		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("./LivrePDF/"+l.getTitre()+".pdf"));
 		document.open();
-		document.add(new Paragraph("page 1"));
-		document.add(new Paragraph(l.getTitre()));
-		document.add(new Paragraph("by "+l.getAuteur()));
-		//document.add(new Paragraph());
+		
+		//creation de differente police de caractere
+		Font f10 = new Font(FontFamily.TIMES_ROMAN, 10);
+		Font f14 = new Font(FontFamily.TIMES_ROMAN, 14);
+		Font f24 = new Font(FontFamily.TIMES_ROMAN, 24);
+		
+		//creation de la premier page
+		Paragraph p = new Paragraph("page 1", f10);
+		p.setAlignment(2);
+		document.add(p);
+		p=new Paragraph(l.getTitre(), f24);
+		p.setAlignment(1);
+		document.add(p);
+		p=new Paragraph("by "+l.getAuteur(), f14);
+		p.setAlignment(1);
+		document.add(p);
 		HashMap<String, Section> sections = l.getSection();
 		HashMap<Section, Integer> pages = new HashMap();
 		int i = 2;
 		pages.put(l.getTetedesection(), i++);
-
+		
+		//map assignant une section a un numero de page
 		for (Entry<String, Section> entry : sections.entrySet()) {
 			Section value = (Section) entry.getValue();
 			if(value!=l.getTetedesection())pages.put(value, i++);
 		}
 		//On commence par la tete de section
+		String str = "";
 		document.newPage();
-		document.add(new Paragraph("page "+pages.get(l.getTetedesection())));
-		document.add(new Paragraph(l.getTetedesection().getNom()));
-		document.add(new Paragraph(l.getTetedesection().getText()));
-		document.add(new Paragraph(" "));
-		document.add(new Paragraph("Voici les objets que vous venez de récupérer :"));
+		p = new Paragraph("page "+pages.get(l.getTetedesection()), f10);
+		p.setAlignment(2);
+		document.add(p);
+		p = new Paragraph(l.getTetedesection().getNom(), f24);
+		p.setAlignment(1);
+		document.add(p);
+		document.add(new Paragraph(l.getTetedesection().getText(), f14));
+		document.add(new Paragraph(" ", f14));
+		str = "Voici les objets que vous venez de récupérer : ";
 		for(IObjet o : l.getTetedesection().getObjets()) {
-			document.add(new Paragraph(o.getNom()+" "));
+			str = str + o.getNom()+" / ";
 		}
-		document.add(new Paragraph(" "));
-		document.add(new Paragraph(" "));
-		document.add(new Paragraph("Où choisissez vous de vous rendre ?"));
-		document.add(new Paragraph(" "));
+		if(l.getTetedesection().getObjets().size()!=0)str = str.substring(0, str.length()-2);
+		document.add(new Paragraph(str, f14));
+		document.add(new Paragraph(" ", f14));
+		document.add(new Paragraph(" ", f14));
+		document.add(new Paragraph("Où choisissez vous de vous rendre ?", f14));
+		document.add(new Paragraph(" ", f14));
 		for(Enchainement e : l.getTetedesection().getEnchainementSource()) {
-			document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : "+e.getTexte()));
-			document.add(new Paragraph("Liste des objets requis :"));
+			str = "Liste des objets requis : ";
+			document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : "+e.getTexte(), f14));
 			for(IObjet o : e.getObjets()) {
-				document.add(new Paragraph(o.getNom()));
+				str = str + o.getNom() +" / ";
 			}
-			document.add(new Paragraph(" "));
+			if(e.getObjets().size()!=0)str = str.substring(0, str.length()-2);
+			document.add(new Paragraph(str, f14));
+			document.add(new Paragraph(" ", f14));
 		}
 		
 		//On fait ensuite toute les autres sections
@@ -85,25 +115,33 @@ public class Parser implements IParser {
 			Section value = (Section) entry.getValue();
 			if(value!=l.getTetedesection()) {
 				document.newPage();
-				document.add(new Paragraph("page "+pages.get(value)));
-				document.add(new Paragraph(value.getNom()));
-				document.add(new Paragraph(value.getText()));
-				document.add(new Paragraph(" "));
-				document.add(new Paragraph("Voici les objets que vous venez de récupérer :"));
+				p = new Paragraph("page "+pages.get(value), f10);
+				p.setAlignment(2);
+				document.add(p);
+				p = new Paragraph(value.getNom(), f24);
+				p.setAlignment(1);
+				document.add(p);
+				document.add(new Paragraph(value.getText(), f14));
+				document.add(new Paragraph(" ", f14));
+				str = "Voici les objets que vous venez de récupérer : ";
 				for(IObjet o : value.getObjets()) {
-					document.add(new Paragraph(o.getNom()+" "));
+					str = str + o.getNom()+" / ";
 				}
-				document.add(new Paragraph(" "));
-				document.add(new Paragraph(" "));
-				document.add(new Paragraph("Où choisissez vous de vous rendre ?"));
-				document.add(new Paragraph(" "));
+				if(value.getObjets().size()!=0)str = str.substring(0, str.length()-2);
+				document.add(new Paragraph(str, f14));
+				document.add(new Paragraph(" ", f14));
+				document.add(new Paragraph(" ", f14));
+				document.add(new Paragraph("Où choisissez vous de vous rendre ?", f14));
+				document.add(new Paragraph(" ", f14));
 				for(Enchainement e : value.getEnchainementSource()) {
-					document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : "+e.getTexte()));
-					document.add(new Paragraph("Liste des objets requis :"));
+					str = "Liste des objets requis : ";
+					document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : "+e.getTexte(), f14));
 					for(IObjet o : e.getObjets()) {
-						document.add(new Paragraph(o.getNom()));
+						str = str + o.getNom() +" / ";
 					}
-					document.add(new Paragraph(" "));
+					if(e.getObjets().size()!=0)str = str.substring(0, str.length()-2);
+					document.add(new Paragraph(str, f14));
+					document.add(new Paragraph(" ", f14));
 				}
 			}
 		}
