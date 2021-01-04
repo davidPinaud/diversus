@@ -19,9 +19,11 @@ import java.util.Map.Entry;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -68,6 +70,18 @@ public class Parser implements IParser {
 		p=new Paragraph("by "+l.getAuteur(), f14);
 		p.setAlignment(1);
 		document.add(p);
+		Image image1 = Image.getInstance("./dvstory.png");
+		image1.setAlignment(Element.ALIGN_CENTER);
+		image1.scaleAbsolute(450, 150);
+		Image image2 = Image.getInstance("./Logo_Diversus.png");
+		image2.setAlignment(Element.ALIGN_CENTER);
+		image2.scaleAbsolute(450, 250);
+		document.add(new Paragraph(" ", f24));
+		document.add(new Paragraph(" ", f24));
+		document.add(new Paragraph(" ", f24));
+		document.add(image1);
+		document.add(new Paragraph(" ", f24));
+		document.add(image2);
 		HashMap<String, Section> sections = l.getSection();
 		HashMap<Section, Integer> pages = new HashMap();
 		int i = 2;
@@ -731,6 +745,8 @@ public class Parser implements IParser {
 					"<h3>by "+l.getAuteur()+"</h3>"+
 					"<a href=\"./"+l.getTitre()+"/"+l.getTetedesection().getNom()+".html\">Commencer</a>"+
 					"  </header>\n" +
+					"<div style=\"text-align: center\"><img src=\"../LOGO_DVStory.gif\" width=200px height=200px></div>"+
+					"<div style=\"text-align: center\"><img src=\"../Logo_Diversus.png\" width=200px height=130px></div>"+
 					"</body>\n" +
 					"</html>\n" +
 					"";
