@@ -115,7 +115,7 @@ public class Parser implements IParser {
 		document.add(new Paragraph(" ", f14));
 		for(Enchainement e : l.getTetedesection().getEnchainementSource()) {
 			str = "Liste des objets requis : ";
-			document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : "+e.getTexte(), f14));
+			document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : \n"+e.getTexte(), f14));
 			for(IObjet o : e.getObjets()) {
 				str = str + o.getNom() +" / ";
 			}
