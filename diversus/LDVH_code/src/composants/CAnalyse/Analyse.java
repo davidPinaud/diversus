@@ -38,16 +38,6 @@ public class Analyse implements IAnalyse{
 		}
 		TouteSections.remove(root.getNom());
 		
-		/*
-		List<String> atteignable=new ArrayList<>();
-		atteignable =teteSection.getNextAtteignable();
-		atteignable.add(teteSection.getNom());
-		
-
-		for(int i=0;i<1000;i++) {
-			
-		}*/
-		
 		int nb=10000;
 		
 		List<String> discovered=new ArrayList<>();
