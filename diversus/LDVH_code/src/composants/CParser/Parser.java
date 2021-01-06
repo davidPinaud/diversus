@@ -19,11 +19,6 @@ import java.util.Map.Entry;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Font.FontFamily;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -40,122 +35,75 @@ import itf.*;
  */
 public class Parser implements IParser {
 
-	/* (non-Javadoc)
-	 * @see itf.IParser#generateImprimable(composants.CLivre.Livre)
-	 */
 	@Override
 	public String generateImprimable(ILivre l) throws DocumentException, IOException{
 
 		//creation du dossier
 		File file = new File("./LivrePDF");
 		if (!file.exists()) file.mkdir();
-
-		//creation du PDF
 		Document document = new Document();
 		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("./LivrePDF/"+l.getTitre()+".pdf"));
 		document.open();
-
-		//creation de differente police de caractere
-		Font f10 = new Font(FontFamily.TIMES_ROMAN, 10);
-		Font f14 = new Font(FontFamily.TIMES_ROMAN, 14);
-		Font f24 = new Font(FontFamily.TIMES_ROMAN, 24);
-
-		//creation de la premier page
-		Paragraph p = new Paragraph("page 1", f10);
-		p.setAlignment(2);
-		document.add(p);
-		p=new Paragraph(l.getTitre(), f24);
-		p.setAlignment(1);
-		document.add(p);
-		p=new Paragraph("by "+l.getAuteur(), f14);
-		p.setAlignment(1);
-		document.add(p);
-		Image image1 = Image.getInstance("./dvstory.png");
-		image1.setAlignment(Element.ALIGN_CENTER);
-		image1.scaleAbsolute(450, 150);
-		Image image2 = Image.getInstance("./Logo_Diversus.png");
-		image2.setAlignment(Element.ALIGN_CENTER);
-		image2.scaleAbsolute(450, 250);
-		document.add(new Paragraph(" ", f24));
-		document.add(new Paragraph(" ", f24));
-		document.add(new Paragraph(" ", f24));
-		document.add(image1);
-		document.add(new Paragraph(" ", f24));
-		document.add(image2);
+		document.add(new Paragraph("page 1"));
+		document.add(new Paragraph(l.getTitre()));
+		document.add(new Paragraph("by "+l.getAuteur()));
+		//document.add(new Paragraph());
 		HashMap<String, Section> sections = l.getSection();
 		HashMap<Section, Integer> pages = new HashMap();
 		int i = 2;
 		pages.put(l.getTetedesection(), i++);
 
-		//map assignant une section a un numero de page
 		for (Entry<String, Section> entry : sections.entrySet()) {
 			Section value = (Section) entry.getValue();
 			if(value!=l.getTetedesection())pages.put(value, i++);
 		}
 		//On commence par la tete de section
-		String str = "";
 		document.newPage();
-		p = new Paragraph("page "+pages.get(l.getTetedesection()), f10);
-		p.setAlignment(2);
-		document.add(p);
-		p = new Paragraph(l.getTetedesection().getNom(), f24);
-		p.setAlignment(1);
-		document.add(p);
-		document.add(new Paragraph(l.getTetedesection().getText(), f14));
-		document.add(new Paragraph(" ", f14));
-		str = "Voici les objets que vous venez de récupérer : ";
+		document.add(new Paragraph("page "+pages.get(l.getTetedesection())));
+		document.add(new Paragraph(l.getTetedesection().getNom()));
+		document.add(new Paragraph(l.getTetedesection().getText()));
+		document.add(new Paragraph(" "));
+		document.add(new Paragraph("Voici les objets que vous venez de récupérer :"));
 		for(IObjet o : l.getTetedesection().getObjets()) {
-			str = str + o.getNom()+" / ";
+			document.add(new Paragraph(o.getNom()+" "));
 		}
-		if(l.getTetedesection().getObjets().size()!=0)str = str.substring(0, str.length()-2);
-		document.add(new Paragraph(str, f14));
-		document.add(new Paragraph(" ", f14));
-		document.add(new Paragraph(" ", f14));
-		document.add(new Paragraph("Où choisissez vous de vous rendre ?", f14));
-		document.add(new Paragraph(" ", f14));
+		document.add(new Paragraph(" "));
+		document.add(new Paragraph(" "));
+		document.add(new Paragraph("Où choisissez vous de vous rendre ?"));
+		document.add(new Paragraph(" "));
 		for(Enchainement e : l.getTetedesection().getEnchainementSource()) {
-			str = "Liste des objets requis : ";
-			document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : \n"+e.getTexte(), f14));
+			document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : "+e.getTexte()));
+			document.add(new Paragraph("Liste des objets requis :"));
 			for(IObjet o : e.getObjets()) {
-				str = str + o.getNom() +" / ";
+				document.add(new Paragraph(o.getNom()));
 			}
-			if(e.getObjets().size()!=0)str = str.substring(0, str.length()-2);
-			document.add(new Paragraph(str, f14));
-			document.add(new Paragraph(" ", f14));
+			document.add(new Paragraph(" "));
 		}
-
+		
 		//On fait ensuite toute les autres sections
 		for (Entry<String, Section> entry : sections.entrySet()) {
 			Section value = (Section) entry.getValue();
 			if(value!=l.getTetedesection()) {
 				document.newPage();
-				p = new Paragraph("page "+pages.get(value), f10);
-				p.setAlignment(2);
-				document.add(p);
-				p = new Paragraph(value.getNom(), f24);
-				p.setAlignment(1);
-				document.add(p);
-				document.add(new Paragraph(value.getText(), f14));
-				document.add(new Paragraph(" ", f14));
-				str = "Voici les objets que vous venez de récupérer : ";
+				document.add(new Paragraph("page "+pages.get(value)));
+				document.add(new Paragraph(value.getNom()));
+				document.add(new Paragraph(value.getText()));
+				document.add(new Paragraph(" "));
+				document.add(new Paragraph("Voici les objets que vous venez de récupérer :"));
 				for(IObjet o : value.getObjets()) {
-					str = str + o.getNom()+" / ";
+					document.add(new Paragraph(o.getNom()+" "));
 				}
-				if(value.getObjets().size()!=0)str = str.substring(0, str.length()-2);
-				document.add(new Paragraph(str, f14));
-				document.add(new Paragraph(" ", f14));
-				document.add(new Paragraph(" ", f14));
-				document.add(new Paragraph("Où choisissez vous de vous rendre ?", f14));
-				document.add(new Paragraph(" ", f14));
+				document.add(new Paragraph(" "));
+				document.add(new Paragraph(" "));
+				document.add(new Paragraph("Où choisissez vous de vous rendre ?"));
+				document.add(new Paragraph(" "));
 				for(Enchainement e : value.getEnchainementSource()) {
-					str = "Liste des objets requis : ";
-					document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : "+e.getTexte(), f14));
+					document.add(new Paragraph(e.getNom()+" (en page "+pages.get(e.getDestinationSection())+") : "+e.getTexte()));
+					document.add(new Paragraph("Liste des objets requis :"));
 					for(IObjet o : e.getObjets()) {
-						str = str + o.getNom() +" / ";
+						document.add(new Paragraph(o.getNom()));
 					}
-					if(e.getObjets().size()!=0)str = str.substring(0, str.length()-2);
-					document.add(new Paragraph(str, f14));
-					document.add(new Paragraph(" ", f14));
+					document.add(new Paragraph(" "));
 				}
 			}
 		}
@@ -693,18 +641,8 @@ public class Parser implements IParser {
 			str2 = str2 +"  </ul>\n" +
 					"  <p>Où choisissez vous de vous rendre ?</p>\n" +
 					"  <ul>\n";
-			//affichage enchainement avec lien cliquable
 			for(Enchainement e : value.getEnchainementSource()) {
-				str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> : "+e.getTexte()+"<br>( objets requis : ";
-				for(IObjet o : e.getObjets()) {
-					str2 = str2 + o.getNom() + " ";
-				}
-				str2 = str2 + ")</li>";
-			}
-			str2 = str2 +"  </ul>" +
-			//affichage enchainement avec un formulaire
-			/*
-			for(Enchainement e : value.getEnchainementSource()) {
+				//str2 = str2 + "      <li> <a href=\"./"+e.getDestinationSection().getNom()+".html\">"+e.getNom()+"</a> : "+e.getTexte()+"<br>( objets requis : ";
 				str2 = str2 + "      <li>"+e.getNom()+" : "+e.getTexte()+"<br>( objets requis : ";
 				for(IObjet o : e.getObjets()) {
 					str2 = str2 + o.getNom() + " ";
@@ -712,6 +650,7 @@ public class Parser implements IParser {
 				str2 = str2 + ")</li>";
 			}
 			str2 = str2 +"  </ul>" +
+
 			"<form name=\"urlselect\" onsubmit=\"return redirectTo(this)\">"+
 			"<select name=\"menu\" value=\"GO\">";
 			for(Enchainement e : value.getEnchainementSource()) {
@@ -719,39 +658,12 @@ public class Parser implements IParser {
 			}
 			str2 = str2 + "</select>"+
 					"<input type=\"submit\"></form>"+
-			*/
+
 			"</body>\n" +
 			"</html>\n" +
 			"";
 			FileOutputStream outputStream2 = new FileOutputStream("./LivreHTML/"+l.getTitre()+"/"+value.getNom()+".html");
 			byte[] strToBytes2 = str2.getBytes();
-			outputStream2.write(strToBytes2);
-			outputStream2.close();
-
-			//creation de la page de garde
-			file2 = new File("./LivreHTML/"+l.getTitre()+".html");
-			str2 = "<!doctype html>\n" +
-					"<html lang=\"fr\">\n" +
-					"<head>\n" +
-					"  <meta charset=\"utf-8\">\n" +
-					"  <title>DVStory by Diversus</title>\n" +
-					"  <link rel=\"stylesheet\" href=\"./style.css\">\n" +
-					"  <script src=\"script.js\"></script>\n" +
-					"</head>\n" +
-					"<body>\n" +
-					"<script src=\"https://code.jquery.com/jquery-3.3.1.js\"></script>"+
-					"  <header>\n" +
-					"<h1>"+l.getTitre()+"</h1>"+
-					"<h3>by "+l.getAuteur()+"</h3>"+
-					"<a href=\"./"+l.getTitre()+"/"+l.getTetedesection().getNom()+".html\">Commencer</a>"+
-					"  </header>\n" +
-					"<div style=\"text-align: center\"><img src=\"../LOGO_DVStory.gif\" width=200px height=200px></div>"+
-					"<div style=\"text-align: center\"><img src=\"../Logo_Diversus.png\" width=200px height=130px></div>"+
-					"</body>\n" +
-					"</html>\n" +
-					"";
-			outputStream2 = new FileOutputStream("./LivreHTML/"+l.getTitre()+".html");
-			strToBytes2 = str2.getBytes();
 			outputStream2.write(strToBytes2);
 			outputStream2.close();
 		}

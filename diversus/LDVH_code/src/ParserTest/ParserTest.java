@@ -24,10 +24,10 @@ public class ParserTest {
 	CLivreBouchon LivreBouchon;
 	protected IParser parser;
 
-	public ParserTest(IParser parser) {
-		this.parser=parser;
+	public ParserTest() {
+		
 	}
-	IParser parser;
+	
 	@Before
 	public void creation() {
 
