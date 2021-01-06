@@ -101,6 +101,8 @@ public class Parser implements IParser {
 		p = new Paragraph(l.getTetedesection().getNom(), f24);
 		p.setAlignment(1);
 		document.add(p);
+		p = new Paragraph(" ", f24);
+		document.add(p);
 		document.add(new Paragraph(l.getTetedesection().getText(), f14));
 		document.add(new Paragraph(" ", f14));
 		str = "Voici les objets que vous venez de récupérer : ";
@@ -134,6 +136,8 @@ public class Parser implements IParser {
 				document.add(p);
 				p = new Paragraph(value.getNom(), f24);
 				p.setAlignment(1);
+				document.add(p);
+				p = new Paragraph(" ", f24);
 				document.add(p);
 				document.add(new Paragraph(value.getText(), f14));
 				document.add(new Paragraph(" ", f14));
