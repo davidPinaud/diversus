@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>DVStory by Diversus</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script><script>function redirectTo(elem) {event.preventDefault();top.location.href = elem.firstElementChild.options[elem.firstElementChild.selectedIndex].value}</script>  <header>
+    <h1>Jungle</h1>
+    <ul class="inline" id="inventaire"> inventaire :
+      <li class="inline">obj1</li>
+      <li class="inline">obj2</li>
+      <li class="inline">obj3</li>
+    </ul>
+  </header>
+
+  <h3>sec1</h3>
+  <p>sec1blablabla</p>
+  <ul class="inline" id="recuperer">voici les objets que vous venez de récupéré :
+      <li class="inline">obj1</li>
+      <li class="inline">obj2</li>
+      <li class="inline">obj3</li>
+  </ul>
+  <p>Où choisissez vous de vous rendre ?</p>
+  <ul>
+  </ul><form name="urlselect" onsubmit="return redirectTo(this)"><select name="menu" value="GO"></select><input type="submit"></form></body>
+</html>

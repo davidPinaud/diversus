@@ -24,7 +24,7 @@ public interface IParser {
 	* @throws IOException
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public String generateImprimable(Livre l) throws DocumentException, IOException;
+	public String generateImprimable(ILivre l) throws DocumentException, IOException;
 
 	/**
 	* <!-- begin-UML-doc -->
@@ -33,5 +33,5 @@ public interface IParser {
 	* @throws IOException
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public String generateHTML(Livre l) throws IOException;
+	public String generateHTML(ILivre l) throws IOException;
 }

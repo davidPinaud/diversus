@@ -36,7 +36,7 @@ import itf.*;
 public class Parser implements IParser {
 
 	@Override
-	public String generateImprimable(Livre l) throws DocumentException, IOException{
+	public String generateImprimable(ILivre l) throws DocumentException, IOException{
 
 		//creation du dossier
 		File file = new File("./LivrePDF");
@@ -115,7 +115,7 @@ public class Parser implements IParser {
 	}
 
 	@Override
-	public String generateHTML(Livre l) throws IOException {
+	public String generateHTML(ILivre l) throws IOException {
 		//creation des dossiers
 		File file = new File("./LivreHTML");
 		if (!file.exists()) file.mkdir();
