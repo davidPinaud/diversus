@@ -13,7 +13,6 @@ import itf.IObjet;
 import composants.CIHM.GestIHM;
 import composants.CLivre.*;
 import composants.CParser.*;
-import ParserTest.CLivreBouchon;
 import composants.CAffichageGraphique.*;
 import composants.CAnalyse.*;
 import composants.CController.*;
@@ -40,15 +39,11 @@ public class CFactory {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public static IParser createParser() {
-
-		return new Parser();
-	}
-	public static ILivre CreateLivreBouchon(String titre,String auteur)
-	{
-		return new CLivreBouchon(titre,auteur);
-		
-		
+	public static IParser createParser(ILivre livre) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+		return null;
+		// end-user-code
 	}
 
 	/** 

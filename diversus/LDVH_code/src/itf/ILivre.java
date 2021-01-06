@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import composants.CLivre.Objets;
-import composants.CLivre.Section;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -181,8 +180,5 @@ public interface ILivre {
 	public String toString();
 	public boolean deleteObjet(String nom);
 	public void addObjet(String nom);
-	HashMap<String, Section> getSection();
-	public String getAuteur();
-	public Section getTetedesection();
 
 }
