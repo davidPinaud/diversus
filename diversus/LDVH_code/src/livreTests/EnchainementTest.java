@@ -12,6 +12,7 @@ import org.junit.Test;
 import composants.CLivre.Livre;
 import composants.Factory.CFactory;
 import itf.*;
+import java.util.Arrays;  
 public class EnchainementTest {
 	IGestLivre gest;
 	ILivre livre ;
@@ -131,7 +132,7 @@ public class EnchainementTest {
 	
 	// test d'intégration creerEnchainement
 	@Test
-	public void IntegTestCreerEnchainement() {
+	public void IntegTestCreerEnchainement() throws Exception {
 		IGestLivre gestTest=CFactory.createGestLivre();
 		try {
 			initData(gestTest);
@@ -142,8 +143,9 @@ public class EnchainementTest {
 		// suite des fonctions du diagramme de séquences inter-composant 
 		ILivre book=gestTest.getLivre("Aventure");
 		
-
-		ILivre bookt=new Livre("Aventure", "Diversus");
+		IGestLivre gest=CFactory.createGestLivre();
+		gest.addLivre("Aventure", "Diversus");
+		ILivre bookt=gest.getLivre("Aventure");
 		bookt.createSection("Bienvenue à l'aventure", "Village");
 		bookt.createSection("Ou est donc la potion magique", "Donjon");
 		bookt.createSection("L'occasion de vendre mes trouvailles", "Boutique");
@@ -153,23 +155,38 @@ public class EnchainementTest {
 		bookt.createObject("Épée");
 		bookt.createObject("Bouclier");
 		
+		assertEquals(bookt, book);
 		
-		//assertEquals(bookt, book);
+		
 		// ou bien test d'égalité du nom car garantit l'unicité
 		assertEquals("Aventure", book.getTitre());
 		
+		List<String> list= new ArrayList<String >();
 		
-		//assertEquals(, book.getObjets());
-		//assertEquals(, book.getSections());
-		//assertEquals(, book.getEnchainements());
+		String[] liste = {"Épée", "Bouclier"};  
+
+	    List<String> wordList = Arrays.asList(liste);  
+		
+		assertEquals(wordList, book.getObjectNames());
+		
+		String[] liste1 = {"Village", "Donjon", "Boutique"}; 
+		
+		assertEquals(liste1, book.getSectionNames());
+		
+		String[] liste2 = {};  
+		//System.out.println("okey");
+		System.out.println(book.getEnchainementNames());
+		assertEquals(liste2, book.getEnchainementNames());
+		
 		
 		assertFalse(book.checkEnchainementExists("Tunnel"));
-		List<String> list=new ArrayList<>();
-		list.add("Bouclier");
+
 		
 		book.AddEnchainement("Tunnel", "Il fait noir ici", book.getSection("Village"), book.getSection("Donjon"), list);
+		String[] liste3 = {"Tunnel"};  
+		assertEquals(liste3, book.getEnchainementNames());
+		assertTrue(book.checkEnchainementExists("Tunnel"));
 		
-		//assertTrue(book.EnchainementExists(book.getSection("Village"), book.getSection("Donjon")));
 		IAffichageGraphique af=CFactory.createAffichageGraphique();
 		af.generate();
 	}
@@ -290,4 +307,3 @@ public class EnchainementTest {
 	
 
 }
-

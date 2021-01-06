@@ -35,6 +35,9 @@ public interface ILivre {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
+	public List<String> getSectionNames();
+	public List<String> getEnchainementNames();
+	public List<String> getObjectNames();
 	public boolean equals(Object livre) ;
 	public void setTete(ISection sec) ;
 	public IObjet getObjet(String nom);

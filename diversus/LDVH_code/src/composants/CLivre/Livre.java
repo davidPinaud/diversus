@@ -327,5 +327,48 @@ public class Livre implements ILivre {
 		this.objets = objets;
 	}
 	
-	
+	@Override
+	public List<String> getObjectNames() {
+		int sz=objets.size();
+		List<String > liste=new ArrayList<String>();
+		
+		for (Entry<String, Objets> entry: objets.entrySet()) {
+			//String titre=entry.getKey();
+			liste.add(entry.getKey());
+			
+		}
+		
+		return liste;
+		
+		
+		
+	}	
+	@Override 
+	public List<String> getSectionNames(){
+		int sz=section.size();
+		List<String > liste=new ArrayList<String>();
+		
+		for (Entry<String, Objets> entry: objets.entrySet()) {
+			//String titre=entry.getKey();
+			liste.add(entry.getKey());
+			
+		}
+		
+		return liste;
+		
+	}
+	@Override
+	public List<String> getEnchainementNames(){
+		int sz=enchainement.size();
+		List<String > liste=new ArrayList<String>();
+		
+		for (Entry<String, Objets> entry: objets.entrySet()) {
+			//String titre=entry.getKey();
+			liste.add(entry.getKey());
+			
+		}
+		
+		return liste;
+	}
+
 }
