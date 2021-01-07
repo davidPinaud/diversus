@@ -171,20 +171,34 @@ public class LivreTest {
 			e.printStackTrace();
 		}
 		
+		//Test sur le getLivre
 		ILivre book=gestTest.getLivre("Aventure");
+		assertEquals("Aventure", book.getTitre());
+		
+		//Test sur le getSections
+		List<String> listSections = Arrays.asList("Village", "Boutique", "Donjon");
+		assertEquals(listSections, book.getSectionNames());
 		ISection src = book.getSection("Village");
 		ISection dest = book.getSection("Donjon");
+
+		//Test sur le getObjects
+		List<String> listObjectsNames = Arrays.asList("epee", "bouclier");
+		assertEquals(listObjectsNames, book.getObjectNames());
 		IObjet objet = book.getObjet("epee");
 		List<IObjet> listObjects = Arrays.asList(objet);
 		
+		//Test sur le getEnchainements
+		List<String> listEnchainements = new ArrayList<String>();
+		assertEquals(listEnchainements, book.getEnchainementNames());
 		
+		//Test sur le createEnchainement
 		assertFalse(book.EnchainementExists(src, dest));
-		book.createEnchainement("chemin p�rilleux vers le donjon","Tunnel", src, dest, listObjects);
+		book.createEnchainement("chemin perilleux vers le donjon","Tunnel", src, dest, listObjects);
 		assertTrue(book.EnchainementExists(src, dest));
+		listEnchainements.add("Tunnel");
+		assertEquals(listEnchainements, book.getEnchainementNames());
 
 		IEnchainement enchainement = book.getEnchainement("Tunnel");
-				
-		
 		assertEquals(enchainement.getObjets(), listObjects);
 		assertEquals(enchainement.getSource(), src.getNom());
 		assertEquals(enchainement.getDestination(), dest.getNom());
@@ -215,12 +229,30 @@ public class LivreTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//Test sur le getLivre
 		ILivre book=gestTest.getLivre("Aventure");
+		assertEquals("Aventure", book.getTitre());
 		
-		//ISection sec = book.getSection("Boutique");
-		assertEquals(true,book.deleteSection("Boutique"));
-		List<String> listSections = Arrays.asList("Village", "Donjon");
+		//Test sur le getSections
+		List<String> listSections = Arrays.asList("Village", "Boutique", "Donjon");
 		assertEquals(listSections, book.getSectionNames());
+
+		//Test sur le getObjects
+		List<String> listObjectsNames = Arrays.asList("epee", "bouclier");
+		assertEquals(listObjectsNames, book.getObjectNames());
+		
+		//Test sur le getEnchainements
+		List<String> listEnchainements = new ArrayList<String>();
+		assertEquals(listEnchainements, book.getEnchainementNames());
+		
+		
+		//Test sur le deleteSection
+		//assertTrue(book.SectionExist("Boutique"));
+		assertFalse(book.isTete("Boutique"));
+		assertEquals(true,book.deleteSection("Boutique"));
+		List<String> listSectionsApresSuppr = Arrays.asList("Village", "Donjon");
+		assertEquals(listSectionsApresSuppr, book.getSectionNames());
+		
 	}
 	@Test
 	public void atteignabilite() throws Exception {
