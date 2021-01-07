@@ -132,7 +132,7 @@ public class Livre implements ILivre {
 	}
 	
 	@Override
-	public void createEnchainement(String nom, String texte, ISection src, ISection dst, List<IObjet> objets) {
+	public void createEnchainement(String texte, String nom, ISection src, ISection dst, List<IObjet> objets) {
 		if(!this.getEnchainement().containsKey(nom)) {
 			Enchainement e=new Enchainement(nom, texte, src, dst, objets);
 			enchainement.put(e.getNom(), e);

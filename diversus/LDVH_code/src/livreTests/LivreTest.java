@@ -183,7 +183,7 @@ public class LivreTest {
 		
 		
 		assertFalse(book.EnchainementExists(src, dest));
-		book.createEnchainement("Tunnel", "chemin périlleux vers le donjon", src, dest, listObjects);
+		book.createEnchainement("chemin périlleux vers le donjon","Tunnel", src, dest, listObjects);
 		assertTrue(book.EnchainementExists(src, dest));
 
 		IEnchainement enchainement = book.getEnchainement("Tunnel");
@@ -227,7 +227,7 @@ public class LivreTest {
 		List<IObjet> listObjects = Arrays.asList(objet);
 		
 		assertFalse(book.EnchainementExists(src, dest));
-		book.createEnchainement("Tunnel", "chemin périlleux vers le donjon", src, dest, listObjects);
+		book.createEnchainement("chemin périlleux vers le donjon","Tunnel" ,src, dest, listObjects);
 		
 		List<String> nexts = src.getNextAtteignable();
 		List<String> expected = new ArrayList<String>();
