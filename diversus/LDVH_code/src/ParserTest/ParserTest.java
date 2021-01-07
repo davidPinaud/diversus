@@ -24,9 +24,7 @@ public class ParserTest {
 	CLivreBouchon LivreBouchon;
 	protected IParser parser;
 
-	public ParserTest() {
-		
-	}
+	public ParserTest() {}
 	
 	@Before
 	public void creation() {
@@ -51,9 +49,9 @@ public class ParserTest {
 		String section3 = LivreBouchon.createSection("sec3", "sec3blablabla");
 
 		try {
-			assert (LivreBouchon.SectionExist("sec1"));
-			assert (LivreBouchon.SectionExist("sec2"));
-			assert (LivreBouchon.SectionExist("sec3"));
+			assert(LivreBouchon.SectionExist("sec1"));
+			assert(LivreBouchon.SectionExist("sec2"));
+			assert(LivreBouchon.SectionExist("sec3"));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -85,7 +83,7 @@ public class ParserTest {
 		while ((line = in1.readLine()) != null) {
 			content1 = content1 + line;
 			// Afficher le contenu du section 1
-			System.out.println(line);
+			//System.out.println(line);
 
 		}
 		assert (content1.contains("sec1"));
@@ -99,7 +97,7 @@ public class ParserTest {
 		while ((line = in2.readLine()) != null) {
 			content2 = content2 + line;
 			// Afficher le contenu de section 2
-			System.out.println(line);
+			//System.out.println(line);
 		}
 		assert (content2.contains("sec2"));
 		assert (content2.contains("sec2blablabla"));
@@ -112,7 +110,7 @@ public class ParserTest {
 		while ((line = in3.readLine()) != null) {
 			content3 = content3 + line;
 			// Afficher le contenu du section 3
-			System.out.println(line);
+			//System.out.println(line);
 		}
 	assert (content3.contains("sec3"));
 	assert (content3.contains("sec3blablabla"));
@@ -126,7 +124,7 @@ public class ParserTest {
 		try {
 			// Créer une instance PdfReader.
 
-			PdfReader pdf = new PdfReader("./LivrePDF/Jungle");
+			PdfReader pdf = new PdfReader("./LivrePDF/Jungle.pdf");
 
 			// Récupérer le nombre de pages en pdf.
 			int nbrPages = pdf.getNumberOfPages();
@@ -137,7 +135,7 @@ public class ParserTest {
 				content = content + PdfTextExtractor.getTextFromPage(pdf, i);
 
 				// Afficher le contenu de la page sur la console.
-				System.out.println("Contenu du page : " + content);
+				//System.out.println("Contenu du page : " + content);
 
 			}
 			assert (content.contains("sec1"));

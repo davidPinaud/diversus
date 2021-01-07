@@ -42,6 +42,7 @@ public class Main {
 	 * Creer un livre
 	 * Ajouter 3 sections
 	 * 	Section A
+	 * 		Objet "Bouclier"
 	 * 	Section B
 	 * 		Objet "épée"
 	 * 	Section C
@@ -67,7 +68,7 @@ public class Main {
 		livreDEMOA.createObject("épée");
 		livreDEMOA.createObject("Bouclier");
 		livreDEMOA.getSection().get("Section B").addObjet(livreDEMOA.getObjets().get("épée"));
-		livreDEMOA.getSection().get("Section A").addObjet(livreDEMOA.getObjets().get("Bouclier"));
+		//livreDEMOA.getSection().get("Section A").addObjet(livreDEMOA.getObjets().get("Bouclier"));
 		List<IObjet> list=new ArrayList<>();
 		list.add((IObjet)livreDEMOA.getObjets().get("épée"));
 		List<IObjet> list2=new ArrayList<>();

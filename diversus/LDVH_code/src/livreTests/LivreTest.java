@@ -52,7 +52,7 @@ public class LivreTest {
 	
 	@Test(expected=Exception.class)
 	
-	// livre deja  present
+	// livre dejaï¿½ present
 	public void creerLivreExistant() throws Exception{
 		gest.addLivre("Paradise" , "toto");
 		gest.addLivre("Paradise" , "toto");
@@ -66,11 +66,7 @@ public class LivreTest {
 		assertFalse(gest.contains("Hell"));
 	}
 	
-	@Test( expected=Exception.class)
-	public void supprimerLivreNonExistant() throws Exception{
-		gest.deleteLivre("Corbeau");
-	}
-	
+
 	
 	@Test
 	// long test
@@ -183,7 +179,7 @@ public class LivreTest {
 		
 		
 		assertFalse(book.EnchainementExists(src, dest));
-		book.createEnchainement("chemin périlleux vers le donjon","Tunnel", src, dest, listObjects);
+		book.createEnchainement("chemin pï¿½rilleux vers le donjon","Tunnel", src, dest, listObjects);
 		assertTrue(book.EnchainementExists(src, dest));
 
 		IEnchainement enchainement = book.getEnchainement("Tunnel");
@@ -193,6 +189,22 @@ public class LivreTest {
 		assertEquals(enchainement.getSource(), src.getNom());
 		assertEquals(enchainement.getDestination(), dest.getNom());
 		assertEquals(enchainement.getNom(), "Tunnel");
+	}
+	
+	
+	
+	@Test 
+	public void setTete() {
+		IGestLivre gestTest=CFactory.createGestLivre();
+		try {
+			initData(gestTest);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ILivre book=gestTest.getLivre("Aventure");
+		book.createSection("texte", "nom");
+		book.setTete(book.getSection("nom"));
+		assertTrue(book.isTete("nom"));
 	}
 	
 	@Test
@@ -206,12 +218,10 @@ public class LivreTest {
 		ILivre book=gestTest.getLivre("Aventure");
 		
 		//ISection sec = book.getSection("Boutique");
-		assertFalse(book.isTete("Boutique"));
-		book.deleteSection("Boutique");
+		assertEquals(true,book.deleteSection("Boutique"));
 		List<String> listSections = Arrays.asList("Village", "Donjon");
 		assertEquals(listSections, book.getSectionNames());
 	}
-	
 	@Test
 	public void atteignabilite() throws Exception {
 		IGestLivre gestTest=CFactory.createGestLivre();
@@ -227,7 +237,7 @@ public class LivreTest {
 		List<IObjet> listObjects = Arrays.asList(objet);
 		
 		assertFalse(book.EnchainementExists(src, dest));
-		book.createEnchainement("chemin périlleux vers le donjon","Tunnel" ,src, dest, listObjects);
+		book.createEnchainement("chemin pï¿½rilleux vers le donjon","Tunnel" ,src, dest, listObjects);
 		
 		List<String> nexts = src.getNextAtteignable();
 		List<String> expected = new ArrayList<String>();

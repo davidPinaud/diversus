@@ -192,6 +192,24 @@ public class CLivreBouchon implements ILivre{
 		return new Section(0,"sec1","sec1blablabla" ,
 				new Livre("Jungle","Rudyard Kipling"), objetsection);
 	}
+
+	@Override
+	public List<String> getSectionNames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getEnchainementNames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getObjectNames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
