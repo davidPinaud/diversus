@@ -132,7 +132,7 @@ public class Livre implements ILivre {
 	}
 	
 	@Override
-	public void createEnchainement(String texte, String nom, ISection src, ISection dst, List<IObjet> objets) {
+	public void createEnchainement(String nom, String texte, ISection src, ISection dst, List<IObjet> objets) {
 		if(!this.getEnchainement().containsKey(nom)) {
 			Enchainement e=new Enchainement(nom, texte, src, dst, objets);
 			enchainement.put(e.getNom(), e);
@@ -187,7 +187,9 @@ public class Livre implements ILivre {
 	@Override
 	public Boolean isTete(String nom) {
 		// TODO Auto-generated method stub
-		return null;
+		if (nom == this.tetedesection.getNom())
+			return true;
+		return false;
 	}
 
 	@Override
@@ -205,7 +207,6 @@ public class Livre implements ILivre {
 	@Override
 	public String toString() {
 		StringBuilder sb=new StringBuilder();
-		sb.append(id);
 		sb.append("livre :");
 		sb.append(titre);
 		sb.append(" d'auteur ' ");
@@ -348,7 +349,7 @@ public class Livre implements ILivre {
 		int sz=section.size();
 		List<String > liste=new ArrayList<String>();
 		
-		for (Entry<String, Objets> entry: objets.entrySet()) {
+		for (Entry<String, Section> entry: section.entrySet()) {
 			//String titre=entry.getKey();
 			liste.add(entry.getKey());
 			

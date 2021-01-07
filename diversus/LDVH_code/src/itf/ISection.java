@@ -55,4 +55,6 @@ public interface ISection {
 	public List<String> getNextAtteignable();
 	
 	public String getText();
+	
+	public void addObjet(IObjet ob);
 }
