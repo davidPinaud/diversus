@@ -186,10 +186,7 @@ public class Livre implements ILivre {
 	
 	@Override
 	public Boolean isTete(String nom) {
-		// TODO Auto-generated method stub
-		if (nom == this.tetedesection.getNom())
-			return true;
-		return false;
+		return nom.equals(this.tetedesection.getNom());
 	}
 
 	@Override
@@ -329,47 +326,45 @@ public class Livre implements ILivre {
 	}
 	
 	@Override
-	public List<String> getObjectNames() {
-		int sz=objets.size();
-		List<String > liste=new ArrayList<String>();
-		
-		for (Entry<String, Objets> entry: objets.entrySet()) {
-			//String titre=entry.getKey();
-			liste.add(entry.getKey());
-			
-		}
-		
-		return liste;
-		
-		
-		
-	}	
-	@Override 
-	public List<String> getSectionNames(){
-		int sz=section.size();
-		List<String > liste=new ArrayList<String>();
-		
-		for (Entry<String, Section> entry: section.entrySet()) {
-			//String titre=entry.getKey();
-			liste.add(entry.getKey());
-			
-		}
-		
-		return liste;
-		
-	}
-	@Override
-	public List<String> getEnchainementNames(){
-		int sz=enchainement.size();
-		List<String > liste=new ArrayList<String>();
-		
-		for (Entry<String, Objets> entry: objets.entrySet()) {
-			//String titre=entry.getKey();
-			liste.add(entry.getKey());
-			
-		}
-		
-		return liste;
-	}
+    public List<String> getObjectNames() {
+        List<String > liste=new ArrayList<String>();
+        
+        for (Entry<String, Objets> entry: objets.entrySet()) {
+            //String titre=entry.getKey();
+            liste.add(entry.getKey());
+            
+        }
+        
+        return liste;
+        
+        
+        
+    }    
+    @Override 
+    public List<String> getSectionNames(){
+        List<String > liste=new ArrayList<String>();
+        
+        for (Entry<String, Section> entry: section.entrySet()) {
+            //String titre=entry.getKey();
+            liste.add(entry.getKey());
+            
+        }
+        
+        return liste;
+        
+    }
+    @Override
+    public List<String> getEnchainementNames(){
+        
+        List<String > liste=new ArrayList<String>();
+        
+        for (Entry<String, Enchainement> entry: this.enchainement.entrySet()) {
+            //String titre=entry.getKey();
+            liste.add(entry.getKey());
+            
+        }
+        
+        return liste;
+    }
 
 }
