@@ -4,16 +4,12 @@
 package composants.Factory;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import composants.CAnalyse.Analyse;
-import composants.CIHM.GestIHM;
 import composants.CLivre.GestLivres;
 import composants.CLivre.Livre;
-import composants.CLivre.Objets;
-import composants.CLivre.Section;
 import composants.CParser.Parser;
 import itf.*;
 
@@ -25,12 +21,6 @@ import itf.*;
  */
 public class Main {
 
-	/*IAffichageGraphique ag = CFactory.createAffichageGraphique();
-	IAnalyse analyse = CFactory.createAnalyse();
-	ILivre livre = CFactory.createLivre("livre");
-	ILivreController controller = CFactory.createController();
-	IParser parser = CFactory.createParser();
-	GestIHM ihm = CFactory.createIHM();*/
 	
 	public static void main(String[] args) throws Exception {
 		demoA();
@@ -57,7 +47,7 @@ public class Main {
 	 */
 	public static void demoA() throws Exception {
 		GestLivres gestLivres=(GestLivres) CFactory.createGestLivre();
-		gestLivres.addLivre("DemoA","Test");
+		gestLivres.addLivre("DemoA","Diversus");
 		Livre livreDEMOA=(Livre) gestLivres.getLivre("DemoA");
 		livreDEMOA.createSection("Entrée", "Section A");
 		livreDEMOA.createSection("Milieu", "Section B");
@@ -68,7 +58,7 @@ public class Main {
 		livreDEMOA.createObject("épée");
 		livreDEMOA.createObject("Bouclier");
 		livreDEMOA.getSection().get("Section B").addObjet(livreDEMOA.getObjets().get("épée"));
-		//livreDEMOA.getSection().get("Section A").addObjet(livreDEMOA.getObjets().get("Bouclier"));
+		livreDEMOA.getSection().get("Section A").addObjet(livreDEMOA.getObjets().get("Bouclier"));
 		List<IObjet> list=new ArrayList<>();
 		list.add((IObjet)livreDEMOA.getObjets().get("épée"));
 		List<IObjet> list2=new ArrayList<>();
@@ -86,6 +76,7 @@ public class Main {
 		Parser p = new Parser();
 		p.generateHTML(livreDEMOA);
 		p.generateImprimable(livreDEMOA);
+		System.out.println("\n");
 	}
 	public static void demoB() throws Exception {
 		GestLivres gestLivres=(GestLivres) CFactory.createGestLivre();
@@ -144,18 +135,6 @@ public class Main {
 		Parser p = new Parser();
 		p.generateHTML(livreDEMOB);
 		p.generateImprimable(livreDEMOB);
-	}
-	public void demoC() {
-		System.out.println();
-	}
-	public void demoD() {
-		System.out.println();
-	}
-	public void demoE() {
-		System.out.println();
-	}
-	public void demoF() {
-		System.out.println();
 	}
 	
 }

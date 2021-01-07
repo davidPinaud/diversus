@@ -247,7 +247,6 @@ public class LivreTest {
 		
 		
 		//Test sur le deleteSection
-		//assertTrue(book.SectionExist("Boutique"));
 		assertFalse(book.isTete("Boutique"));
 		assertEquals(true,book.deleteSection("Boutique"));
 		List<String> listSectionsApresSuppr = Arrays.asList("Village", "Donjon");
